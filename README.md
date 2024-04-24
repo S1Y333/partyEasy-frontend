@@ -1,55 +1,124 @@
-# Project Title
+
+# Party Easy App
 
 ## Overview
 
-What is your app? Brief description in a couple of sentences.
+The app is designed to organize party easily but also include almost everything for holding a party
 
 ### Problem
 
-Why is your app needed? Background information around any pain points or other reasons.
+City life is around "BUSY". We're all busy with work, kids and everyday work & life. Sometimes we really want to organize a party to reunion with old friends or team members, even a surprise party for kids or your family, but planning a party is time consuming. Here, our app is to the rescue.
 
 ### User Profile
 
-Who will use your app? How will they use it? Any special considerations that your app must take into account.
+Anyone who wants to organize a party, small or big.
 
 ### Features
 
-List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
+- Based on the budget to recommend party packages
+ -- package details including venue-food-drink-supplies based on user's form  answers
+ -- venues holding the numbers of guests as user requested
+ -- venues based on location to search
+ -- show venue on the map
+- User profile
+-- User's saved party packages
 
 ## Implementation
 
 ### Tech Stack
-
-List technologies that will be used in your app, including any libraries to save time or provide more functionality. Be sure to research any potential limitations.
+- Frontend
+--material UI
+--React
+--Scss
+- Backend
+--Typescript
+--Express
+- Database
+-- MySQL
+- ORM
+-- TypeORM
 
 ### APIs
 
-List any external sources of data that will be used in your app.
+- unsplash api
+- google map api
 
 ### Sitemap
 
-List the pages of your app with brief descriptions. You can show this visually, or write it out.
+- app front page
+- form page
+- list of packages page
+- package detail page
+- user login/signup page
+- user profile page
+- user saved packages
 
 ### Mockups
 
-Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
+
 
 ### Data
 
-Describe your data and the relationships between them. You can show this visually using diagrams, or write it out. 
+Describe your data and the relationships between them. You can show this visually using diagrams, or write it out. (design database)
+- venue
+-- venue name
+--  accommodate number of people
+-- price 
+--location
+- drinks
+--category : [alcohol, non alcohol]
+--drink name
+--price 
+- food
+-- category: [pizza, chicken, Mexico food , sea food, sushi]
+--price for each category
+- party supply
+--party supply name
+--price
+- user
+-- user name
+-- user password
+-- email
+--saved package id
+- package list (generated package list)
+-- userId
+-- price
+--venueId
+--drinkId (Id array)
+--foodId (Id array)
+--supplyId (Id array)
+--likes
+--saves
 
 ### Endpoints
 
 List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
+router.get("/venue/:venueId"  )
+router.get("/drink/:drinkId"  )
+router.get("/food/:foodId"  )
+router.get("/supply/:supplyId"  )
+router.post("/party") // generate party packages
+router.get("/party/:partyId"  ) 
+router.post ("/login")
+router.post("/signup")
+router.delete("/user/:partyId") //delete saved packages
+
 
 ### Auth
 
-Does your project include any login or user profile functionality? If so, describe how authentication/authorization will be implemented.
+yes, JWT web token verify and hash password 
+
 
 ## Roadmap
 
-Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
+- April 24-April 28: project skeleton backend, frontend, database, seed data preparation, API connection
+- April 29-May 1st: package generation functions and user login/sign up function
+- May 2nd- May 3rd save package and package detail page 
+- May 4th - May 6th. debugging and add other diving deeper functions
 
 ## Nice-to-haves
 
-Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
+- Web Scraping venue, drink, food, party supplies from website to get real-time data
+- Discover page with recommended/popular party packages
+- Social functions, like rate the packages, like, comment, share and
+chat with other users
