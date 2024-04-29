@@ -1,0 +1,29 @@
+@use "../../styles/partials/mixin.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
+.logo__img {
+  height: 5rem;
+}
+
+.header {
+
+     &__nav {
+    display: flex;
+    align-items: center;
+  }
+
+    &__logo {
+    // width: 8.03688rem;
+    height: 3.75rem;
+    
+    // flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+
+    @include tablet {
+      padding: 1em;
+    }
+  }
+
+}
