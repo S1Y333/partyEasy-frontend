@@ -1,0 +1,17 @@
+@use "../../styles/partials/mixin.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
+
+
+.form {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+}
+
+#form-button {
+    background-color: $Primary-Black;
+    margin-left: 0.5rem;
+    width:21.8rem;
+}

@@ -1,0 +1,14 @@
+
+.page {
+
+    &__title {
+    display: flex;
+
+    width: 100%;
+    align-items: center;
+
+    &-copy {
+      margin-left: 8rem;
+    }
+  }
+}
