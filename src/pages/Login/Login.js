@@ -1,6 +1,7 @@
 import LoginForm from "../../components/LoginForm/LoginForm";
 import "./Login.scss";
 import HeaderLogo from "../../components/HeaderLogo/HeaderLogo";
+import { auth } from "../../firebase";
 
 const Login = () => {
 

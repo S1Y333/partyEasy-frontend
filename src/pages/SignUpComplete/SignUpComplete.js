@@ -39,7 +39,8 @@ const SignUpComplete = () => {
 
   const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(email + "email " + password);
+    console.log(email + "email " + password);
+    
     //check if email/password is provided
     if (!email || !password) {
       toast.error("Email and password is required");
@@ -63,7 +64,7 @@ const SignUpComplete = () => {
 
       if (result.user.emailVerified) {
         //remove user from local storage
-        localStorage.removeItem("emailForRegistration");
+        localStorage.removeItem("emailForSignUp");
         //get user id token
         let user = auth.currentUser;
         await updatePassword(user, password);
@@ -76,7 +77,7 @@ const SignUpComplete = () => {
           dispatch({
             type: "LOGGED_IN_USER",
             payload: {
-              name: res.data.username,
+              
               email: user.email,
               token: idTokenResult.token,
               id: res.data.id,

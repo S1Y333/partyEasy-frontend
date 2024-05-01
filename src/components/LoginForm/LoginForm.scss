@@ -39,11 +39,20 @@
   }
 }
 
+
+#standard-email ,
 #standard-basic {
+color:$Primary-White;
   &-label {
     color: $Primary-White;
   }
+  &__button {
+    border-color: white;
+    color:$Primary-White;
+  }
 }
+
+
 
 .link {
      color: $Primary-White;
