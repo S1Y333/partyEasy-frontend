@@ -1,0 +1,20 @@
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/mixin.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
+.user-packagelist {
+    margin: 8vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logout {
+    background-color: $Background-Graphite;
+    height:5rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}

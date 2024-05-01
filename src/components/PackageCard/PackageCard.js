@@ -7,34 +7,63 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import IconButton from "@mui/material/IconButton";
+import sampleImg from "../../assets/images/surprise-party-hero.jpg"
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import "./PackageCard.scss"
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+import {Link }from "react-router-dom";
 
-const PackageCard = () => {
-  return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
-  );
+const PackageCard = ({packageId}) => {
+    return (
+      <Link to={`/packageDetail/${packageId}`} className="link">
+        <Card sx={{ width: 350 }}>
+          <CardMedia
+            sx={{ height: 140 }}
+            image={sampleImg}
+            title="green iguana"
+          />
+          <CardContent
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              paddingBottom: 0,
+            }}
+          >
+            <Typography gutterBottom variant="h5" component="div">
+              Boston Pizza
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Budget from $1000
+            </Typography>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <LocationOnIcon />
+              <p className="location-copy">
+                5170 Yonge St #100, North York, ON M2N 0G1
+              </p>
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <IconButton aria-label="add to favorites">
+              <Checkbox
+                // sx={{ color: "white" }}
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite sx={{ color: "red" }} />}
+              />
+            </IconButton>
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </CardActions>
+        </Card>
+      </Link>
+    );
 };
 
 export default PackageCard;

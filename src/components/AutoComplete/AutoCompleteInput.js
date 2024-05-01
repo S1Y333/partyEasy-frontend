@@ -1,26 +1,32 @@
 import React from "react";
 import Autocomplete from "react-google-autocomplete";
-import "./AutoCompleteInput.scss"
+import "./AutoCompleteInput.scss";
 
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
-const AutocompleteInput= ({ onPlaceSelected }) => {
+const AutocompleteInput = ({ onPlaceSelected, setCoordinates }) => {
   const handlePlaceSelected = (place) => {
     if (onPlaceSelected) {
       onPlaceSelected(place);
     }
+    console.log(place);
+    console.log("+++++!!!!1" + place.geometry.location);
+    setCoordinates(place.geometry.location);
   };
-    console.log(API_KEY)
 
   return (
     <Autocomplete
       apiKey={API_KEY}
       language="en"
-      country="us"
-      coordinates={true}
+      coordinates="true"
       placeholder="Enter Your preferred location"
-          onSelect={handlePlaceSelected}
-          className="auto-input"
+      onPlaceSelected={handlePlaceSelected}
+      options={{
+        fields: ["geometry"],
+        componentRestrictions: { country: "ca" },
+      }}
+      defaultValue="Amsterdam"
+      className="auto-input"
     />
   );
 };

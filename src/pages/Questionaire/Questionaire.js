@@ -10,6 +10,7 @@ import Select from "@mui/material/Select";
 import "./Questionaire.scss";
 import { useState } from "react";
 import AutocompleteInput from "../../components/AutoComplete/AutoCompleteInput";
+import { formatCoordinateString } from "../../utils/helper";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -22,14 +23,14 @@ const MenuProps = {
   },
 };
 
-const names = ["Non-alcohol", "Alcohol", "None"];
+const drink = ["Non-alcohol", "Alcohol", "None"];
 
 const food = ["Pizza", "Sushi", "Mexico", "Chicken"];
 
-function getStyles(name, personName, theme) {
+function getStyles(name, eachName, theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      eachName.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
@@ -37,21 +38,72 @@ function getStyles(name, personName, theme) {
 
 const Questionaire = () => {
   const theme = useTheme();
-  const [personName, setPersonName] = useState([]);
+  const [drinkName, setDrinkName] = useState([]);
+  const [foodName, setFoodName] = useState([]);
+  const [coordinates, setCoordinates] = useState({})
+  const initialFormData = {
+    numOfGuests: 0,
+    budget: 0,
+  };
+  const [formData, setFormData] = useState(initialFormData)
+//   const handleChange = (event) => {
+//     event.preventDefault();
+//     set
 
-  const handleChange = (event) => {
+  // }
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevState) => ({ ...prevState, [name]: value }));
+    };
+  
+  const handleDrinkChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setDrinkName(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
   };
 
+  const handleFoodChange = (event) => {
+     const {
+       target: { value },
+     } = event;
+     setFoodName(
+       // On autofill we get a stringified value.
+       typeof value === "string" ? value.split(",") : value
+     );
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const FormattedCoordinates = formatCoordinateString(coordinates);
+    const newRequestData = {
+    numOfGuests: formData.numOfGuests,
+      budget: formData.budget,
+        coordinates: FormattedCoordinates,
+          drink: drinkName,
+            food: foodName
+    }
+    console.log(newRequestData);
+    // }
+    // console.log(
+    //   "DATA GET!!....>>" +
+    //     JSON.stringify(formData) +
+    //     " " +
+    //     drinkName +
+    //     " " +
+    //     foodName +
+    //     " " +
+    //     coordinates
+    // );
+  }
+  
+
   return (
     <div>
-      <Header />
+      <Header page="question" />
 
       <form className="form">
         <TextField
@@ -59,25 +111,24 @@ const Questionaire = () => {
           type="text"
           label="Number Of Guests*"
           variant="outlined"
+          value={FormData.numOfGuests}
+          onChange={handleChange}
+          name="numOfGuests"
         />
         <br />
         <TextField
           style={{ width: "100%", margin: "5px" }}
-          type="text"
+          type="number"
           label="Estimated Budget*"
           variant="outlined"
+          value={FormData.budget}
+          onChange={handleChange}
+          name="budget"
         />
+
         <br />
 
-        <TextField
-          style={{ width: "100%", margin: "5px" }}
-          type="text"
-          label="Preferred party location*"
-          variant="outlined"
-        />
-        <br />
-
-        <AutocompleteInput />
+        <AutocompleteInput setCoordinates={setCoordinates} />
 
         <br />
         <FormControl sx={{ m: 1, width: "100%" }}>
@@ -86,16 +137,16 @@ const Questionaire = () => {
             labelId="demo-multiple-name-label"
             id="demo-multiple-name"
             multiple
-            value={personName}
-            onChange={handleChange}
+            value={drinkName}
+            onChange={handleDrinkChange}
             input={<OutlinedInput label="Name" />}
             MenuProps={MenuProps}
           >
-            {names.map((name) => (
+            {drink.map((name) => (
               <MenuItem
                 key={name}
                 value={name}
-                style={getStyles(name, personName, theme)}
+                style={getStyles(name, drinkName, theme)}
               >
                 {name}
               </MenuItem>
@@ -109,16 +160,16 @@ const Questionaire = () => {
             labelId="demo-multiple-name-label"
             id="demo-multiple-name"
             multiple
-            value={personName}
-            onChange={handleChange}
-            input={<OutlinedInput label="Name" />}
+            value={foodName}
+            onChange={handleFoodChange}
+            input={<OutlinedInput label="Food Name" />}
             MenuProps={MenuProps}
           >
             {food.map((name) => (
               <MenuItem
                 key={name}
                 value={name}
-                style={getStyles(name, personName, theme)}
+                style={getStyles(name, foodName, theme)}
               >
                 {name}
               </MenuItem>
@@ -127,7 +178,7 @@ const Questionaire = () => {
         </FormControl>
         <br />
 
-        <Button variant="contained" id="form-button">
+        <Button variant="contained" id="form-button" onClick={handleSubmit}>
           Submit
         </Button>
       </form>

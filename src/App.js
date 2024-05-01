@@ -30,14 +30,13 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
-        console.log("user", user);
+        console.log("idTokenResult", idTokenResult);
 
         currentUser(idTokenResult.token)
           .then((res) => {
             dispatch({
               type: "LOGGED_IN_USER",
               payload: {
-                name: res.data.username,
                 email: res.data.email,
                 token: idTokenResult.token,
                 id: res.data.id,
@@ -58,7 +57,7 @@ function App() {
       <Routes>
         <Route path="/" element={<CoverPage />} />
         <Route path="formPage" element={<Questionaire />} />
-        <Route path="packageDetail" element={<PackageDetail />} />
+        <Route path="packageDetail/:packageId" element={<PackageDetail />} />
         <Route path="user/packageList/:userId" element={<SavedPackageList />} />
         <Route path="packageList" element={<PackageList />} />
         <Route path="login" element={<Login />} />
