@@ -17,6 +17,7 @@ import Stack from "@mui/material/Stack";
 import { Link } from 'react-router-dom';
 import "./SignupForm.scss"
 
+
 const SignupForm = ({ createAccount}) => {
   const [showPassword, setShowPassword] = useState(false);
   
@@ -62,6 +63,7 @@ const SignupForm = ({ createAccount}) => {
           onSubmit={handleSubmit}
         >
           <Box>
+           
             <TextField
               name="username"
               className="form__text"
