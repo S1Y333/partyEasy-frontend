@@ -23,9 +23,12 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import { createUser } from "../../utils/auth-functions";
 import HeaderLogo from "../../components/HeaderLogo/HeaderLogo";
+import ImageUpload from "../../components/ImageUpload/ImageUpload";
+import "./SignUpComplete.scss";
 
 const SignUpComplete = () => {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -38,15 +41,15 @@ const SignUpComplete = () => {
   });
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
     console.log(email + "email " + password);
-    
+
     //check if email/password is provided
     if (!email || !password) {
       toast.error("Email and password is required");
       return;
     }
-    
+
     //checck if password is longer than 6
     if (password.length < 6) {
       toast.error("Password must be at least 6 characters long");
@@ -54,8 +57,8 @@ const SignUpComplete = () => {
     }
 
     // update password in firebase and request to backend to create a new user
-      try {
-         const result = await signInWithEmailLink(
+    try {
+      const result = await signInWithEmailLink(
         auth,
         email,
         window.location.href
@@ -73,11 +76,10 @@ const SignUpComplete = () => {
         // redux store
         console.log("user", user, "idTokenResult", idTokenResult);
         try {
-          const res = await createUser(idTokenResult.token);
+          const res = await createUser(idTokenResult.token, username);
           dispatch({
             type: "LOGGED_IN_USER",
             payload: {
-              
               email: user.email,
               token: idTokenResult.token,
               id: res.data.id,
@@ -87,23 +89,35 @@ const SignUpComplete = () => {
         } catch (error) {
           console.log(error);
         }
-    }
-      } catch (error) {
-          console.log(error);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
     <div className="cover-form">
       <HeaderLogo />
-      <div className="">
+      <div className="signupform">
         Register Complete
         <Box
           component="form"
           noValidate
-          className="form__box"
+          className="signupform__box"
           onSubmit={handleSubmit}
         >
+          <ImageUpload center id="image" />
+          <TextField
+            name="email"
+            className="signupform__text"
+            id="standard-basic"
+            value={username}
+            label="Username"
+            variant="standard"
+            fullWidth
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
           <TextField
             name="email"
             className="signupform__text"
@@ -111,7 +125,9 @@ const SignUpComplete = () => {
             value={email}
             label="Email"
             variant="standard"
+            fullWidth
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <TextField
