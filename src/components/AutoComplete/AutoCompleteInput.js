@@ -25,7 +25,7 @@ const AutocompleteInput = ({ onPlaceSelected, setCoordinates }) => {
         fields: ["geometry"],
         componentRestrictions: { country: "ca" },
       }}
-      defaultValue="Amsterdam"
+      defaultValue="Toronto"
       className="auto-input"
     />
   );

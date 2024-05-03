@@ -15,17 +15,50 @@ import SportsBarIcon from "@mui/icons-material/SportsBar";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import { Typography } from "@mui/material";
 import PageTop from "../../components/PageTop/PageTop";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { getPackageById } from "../../utils/package-functions";
+import { useState } from "react";
+import Loading from "../../components/Loading/Loading";
+import LinkIcon from "@mui/icons-material/Link";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
+
 const PackageDetail = () => {
+  const { packageId } = useParams();
+  // const [packageDetail, setPackageDetail] = useState({});
+  const [venue, setVenue] = useState("");
+  const [venuelink, setVenuelink] = useState("");
+  const [drink, setDrink] = useState("");
+  const [food, setFood] = useState("");
+  const [budget, setBudget] = useState("");
+  const [coordinates, setCoordinates] = useState([]);
+
+  useEffect(() => {
+    loadPackageDetail();
+  }, []);
+
+  const loadPackageDetail = async () => {
+    const result = await getPackageById(packageId);
+    setVenue(result.data.venues.venuename);
+    setVenuelink(result.data.venues.link);
+    setDrink(result.data.drinks.map((d) => d.drinkname));
+    setFood(result.data.foods.map((f) => f.foodchoice));
+    setBudget(result.data.price);
+    setCoordinates(result.data.venues.location);
+    // setPackageDetail(result.data);
+  };
+  // console.log(packageDetail);
+  console.log(coordinates);
+
   return (
     <div className="cover-form detail">
       <NavHeader />
 
       <div className="detail__up">
-       <PageTop title="Package Detail"/>
-        <Map />
+        <PageTop title="Package Detail" />
+       {coordinates.length>0? <Map coordinates={coordinates} /> : <Loading />}
       </div>
       <div className="detail__down">
         <List sx={{ width: "100%" }}>
@@ -37,7 +70,7 @@ const PackageDetail = () => {
             </ListItemAvatar>
             <ListItemText
               primary="Venue"
-              secondary="CN Tower"
+              secondary={venue}
               secondaryTypographyProps={{ color: " white" }}
             />
           </ListItem>
@@ -49,7 +82,7 @@ const PackageDetail = () => {
             </ListItemAvatar>
             <ListItemText
               primary="Drink"
-              secondary="White Wine, Orange Juice"
+              secondary={drink}
               secondaryTypographyProps={{ color: " white" }}
             />
           </ListItem>
@@ -61,7 +94,7 @@ const PackageDetail = () => {
             </ListItemAvatar>
             <ListItemText
               primary="Food"
-              secondary="Mexico, Chicken"
+              secondary={food}
               secondaryTypographyProps={{ color: " white" }}
             />
           </ListItem>
@@ -69,7 +102,7 @@ const PackageDetail = () => {
       </div>
       <div className="detail__bottom">
         <Typography variant="h5" gutterBottom>
-          Budget from $1000
+          Budget from CA${budget}
         </Typography>
 
         <Checkbox

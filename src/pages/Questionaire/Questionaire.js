@@ -11,6 +11,8 @@ import "./Questionaire.scss";
 import { useState } from "react";
 import AutocompleteInput from "../../components/AutoComplete/AutoCompleteInput";
 import { formatCoordinateString } from "../../utils/helper";
+import { createNewPackage } from "../../utils/package-functions";
+import { useSelector, useDispatch } from "react-redux";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -38,6 +40,8 @@ function getStyles(name, eachName, theme) {
 
 const Questionaire = () => {
   const theme = useTheme();
+ const { user } = useSelector((state) => ({ ...state }));
+
   const [drinkName, setDrinkName] = useState([]);
   const [foodName, setFoodName] = useState([]);
   const [coordinates, setCoordinates] = useState({})
@@ -76,17 +80,20 @@ const Questionaire = () => {
      );
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const FormattedCoordinates = formatCoordinateString(coordinates);
     const newRequestData = {
-    numOfGuests: formData.numOfGuests,
+      numOfGuests: formData.numOfGuests,
       budget: formData.budget,
-        coordinates: FormattedCoordinates,
-          drink: drinkName,
-            food: foodName
-    }
-    console.log(newRequestData);
+      coordinates: FormattedCoordinates,
+      drink: drinkName,
+      food: foodName,
+    };
+
+    const newPackage = await createNewPackage(user.token, newRequestData); //successful, tested
+    //redirect to the packagelist page with new created packageinfo
+    
     // }
     // console.log(
     //   "DATA GET!!....>>" +

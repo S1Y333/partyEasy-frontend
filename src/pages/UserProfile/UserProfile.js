@@ -6,6 +6,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { signOut} from 'firebase/auth'
+import PackageList from "../../components/PackageList/PackageList";
 
 const UserProfile = () => {
   
@@ -20,6 +21,7 @@ const UserProfile = () => {
   const avatarLink = "https://res.cloudinary.com/dtq1qzwxn/image/upload/v1714399544/3_jgj0il.jpg";
   
   const logout = () => {
+
     signOut(auth).then(() => {
       dispatch({
         type: "LOGOUT",
@@ -34,9 +36,7 @@ const UserProfile = () => {
     <div>
       <Header name={username} avatarLink={avatarLink} />
       <div className="user-packagelist">
-        <PackageCard />
-        <br />
-        <PackageCard />
+        <PackageList packageList={userPackageList}/>
       </div>
       <div className="logout">
         <LogoutIcon onClick={logout} />

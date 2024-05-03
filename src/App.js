@@ -2,7 +2,6 @@ import NotFoundPage from "./pages/Error/Error";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CoverPage from "./pages/CoverPage/CoverPage";
 import Questionaire from "./pages/Questionaire/Questionaire";
-import PackageList from "./pages/PackageList/PackageList";
 import PackageDetail from "./pages/PackageDetail/PackageDetail";
 import SavedPackageList from "./pages/SavedPackageList/SavedPackageList";
 import Login from "./pages/Login/Login";
@@ -15,11 +14,12 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { currentUser } from "./utils/auth-functions";
-import Header from './pages/Header/Header'
+import Header from "./pages/Header/Header";
 
 import "react-toastify/dist/ReactToastify.css";
 
 import React from "react";
+import PackageListPage from "./pages/PackageListPage/PackageListPage";
 //
 
 function App() {
@@ -52,14 +52,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      
       <ToastContainer />
       <Routes>
         <Route path="/" element={<CoverPage />} />
         <Route path="formPage" element={<Questionaire />} />
         <Route path="packageDetail/:packageId" element={<PackageDetail />} />
-        <Route path="user/packageList/:userId" element={<SavedPackageList />} />
-        <Route path="packageList" element={<PackageList />} />
+        {/* <Route path="user/packageList/:userId" element={<SavedPackageList />} /> */}
+        <Route path="packageList" element={<PackageListPage />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="/signup/complete" element={<SignUpComplete />} />
