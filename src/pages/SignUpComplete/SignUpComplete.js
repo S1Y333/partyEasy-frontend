@@ -31,6 +31,7 @@ const SignUpComplete = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+   const [file, setFile] = useState();
 
   let dispatch = useDispatch();
 
@@ -45,8 +46,8 @@ const SignUpComplete = () => {
     console.log(email + "email " + password);
 
     //check if email/password is provided
-    if (!email || !password) {
-      toast.error("Email and password is required");
+    if (!email || !password || !username) {
+      toast.error("Email, username and password is required");
       return;
     }
 
@@ -73,10 +74,14 @@ const SignUpComplete = () => {
         await updatePassword(user, password);
         const idTokenResult = await getIdTokenResult(user);
 
+        //profile photo upload to cloudinary, then return a link which will be 
+        //written in database
+       
+
         // redux store
         console.log("user", user, "idTokenResult", idTokenResult);
         try {
-          const res = await createUser(idTokenResult.token, username);
+          const res = await createUser(idTokenResult.token, username, file );
           dispatch({
             type: "LOGGED_IN_USER",
             payload: {
@@ -95,106 +100,131 @@ const SignUpComplete = () => {
     }
   };
 
+  //upload and resize photo to cloudinary then return a link
+  //  const fileUploadAndResize = (e) => {
+  //    //console.log(e.target.files);
+  //    //resize
+  //    let files = e.target.files;
+  //    let allUploadedFiles = values.images;
+
+  //    if (files) {
+  //      setLoading(true);
+  //      for (let i = 0; i < files.length; i++) {
+  //        Resizer.imageFileResizer(
+  //          files[i],
+  //          720,
+  //          720,
+  //          "JPEG",
+  //          100,
+  //          0,
+  //          (uri) => {
+  //            // console.log(uri);
+  //            axios
+  //              .post(
+  //                `${process.env.REACT_APP_API}/uploadimages`,
+  //                { image: uri },
+  //                {
+  //                  headers: {
+  //                    authtoken: user ? user.token : "",
+  //                  },
+  //                }
+  //              )
+  //              .then((res) => {
+  //                console.log("IMAGE UPLOAD RES DATA", res);
+  //                setLoading(false);
+  //                //push all the image url to the array
+  //                allUploadedFiles.push(res.data);
+  //                // push allUploadedFiles to the image array in the product object
+  //                setValues({ ...values, image: allUploadedFiles });
+  //              })
+  //              .catch((err) => {
+  //                setLoading(false);
+  //                console.log("CLOUDINARY UPLOAD ERR", err);
+  //              });
+  //          },
+  //          "base64"
+  //        );
+  //      }
+  //    }
+  //    //send back to server to upload to cloudinary
+  //    //set url to images[] in the parent component - product create
+  //  };
+
   return (
-    <div className="cover-form">
+    <div className="cover-form ">
       <HeaderLogo />
       <div className="signupform">
-        Register Complete
+        <Typography variant="h5">Register Complete</Typography>
         <Box
           component="form"
           noValidate
           className="signupform__box"
           onSubmit={handleSubmit}
         >
-          <ImageUpload center id="image" />
-          <TextField
-            name="email"
-            className="signupform__text"
-            id="standard-basic"
-            value={username}
-            label="Username"
-            variant="standard"
-            fullWidth
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <TextField
-            name="email"
-            className="signupform__text"
-            id="standard-basic"
-            value={email}
-            label="Email"
-            variant="standard"
-            fullWidth
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <ImageUpload setFile={setFile} />
+          
+            <TextField
+              name="email"
+              className="signupform__text"
+              id="standard-basic"
+              value={username}
+              label="Username"
+              variant="standard"
+              
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <TextField
+              name="email"
+              className="signupform__text"
+              id="standard-basic"
+              value={email}
+              label="Email"
+              variant="standard"
+              
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-          <TextField
-            name="password"
-            className="form__text"
-            id="standard-basic"
-            label="Password"
-            variant="standard"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            fullWidth
-            //   error={validationRes.errs?.email}
-            //   helperText={validationRes.errs?.email}
-            InputProps={{
-              endAdornment: (
-                <IconButton onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? (
-                    <Visibility sx={{ fontSize: "20px", color: "#ffffff" }} />
-                  ) : (
-                    <VisibilityOff
-                      sx={{ fontSize: "20px", color: "#ffffff" }}
-                    />
-                  )}
-                </IconButton>
-              ),
-            }}
-          />
-
-          <Box
-            sx={{
-              width: { xs: "398px", md: "434px" },
-              height: "70px",
-            }}
-          >
-            <Button
-              type="submit"
-              fullWidth
-              variant="outlined"
-              sx={{
-                mt: "24px",
-                mb: 2,
-                height: "41px",
-                background: "#ffffff",
-                // fontFamily: "'Inter', sans-serif",
-
-                color: "#ffffff",
-                opacity: "30%",
-
-                textTransform: "none",
-                //   backgroundColor: validationRes.isValid ? "#6750A4" : "#6B7280",
-                //   ":hover": {
-                //     bgcolor: "#6750A4",
-                //   },
-                "& .MuiButton-label": {
-                  fontStyle: "normal",
-                  fontWeight: "500",
-                  fontSize: "14px",
-                  lineHeight: "150%",
-                },
+            <TextField
+              name="password"
+              className="form__text"
+              id="standard-basic"
+              label="Password"
+              variant="standard"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              
+              //   error={validationRes.errs?.email}
+              //   helperText={validationRes.errs?.email}
+              InputProps={{
+                endAdornment: (
+                  <IconButton onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? (
+                      <Visibility sx={{ fontSize: "20px", color: "#ffffff" }} />
+                    ) : (
+                      <VisibilityOff
+                        sx={{ fontSize: "20px", color: "#ffffff" }}
+                      />
+                    )}
+                  </IconButton>
+                ),
               }}
-              //    disabled={!validationRes.isValid || isCheckingBackEnd}
-            >
-              {/* {isCheckingBackEnd ? <CircularWaiting size={20} /> : "Log in"} */}
-              Sign Up
-            </Button>
-          </Box>
+            />
+
+              <Button
+                type="submit"
+                
+                variant="outlined"
+                sx={{ marginTop:"2rem", color: "white", borderColor:"white"}}
+                //    disabled={!validationRes.isValid || isCheckingBackEnd}
+              >
+                {/* {isCheckingBackEnd ? <CircularWaiting size={20} /> : "Log in"} */}
+                Complete Sign Up
+              </Button>
+            
+          
         </Box>
       </div>
     </div>

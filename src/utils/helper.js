@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const UNSPLASH_KEY = process.env.UNSPLASH_KEY;
+const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 export const formatCoordinateString = (coordinateString) => {
   const regex = /\(([^,]+),\s+([^)]+)\)/; // Regular expression to extract latitude and longitude
@@ -12,10 +13,7 @@ export const formatCoordinateString = (coordinateString) => {
     const lon = parseFloat(match[2]); // Convert longitude string to float
 
     // Create an object with latitude and longitude properties
-    const coordinates = {
-      lat,
-      lon,
-    };
+    const coordinates = [lat, lon];
 
     console.log("Formatted coordinates:", coordinates);
 
@@ -25,14 +23,14 @@ export const formatCoordinateString = (coordinateString) => {
   }
 };
 
-async function reverseGeocode(lat, lng) {
+export async function reverseGeocode(lat, lng) {
   try {
     const response = await axios.get(
       "https://maps.googleapis.com/maps/api/geocode/json",
       {
         params: {
           latlng: `${lat},${lng}`,
-          key: "YOUR_API_KEY", // Replace with your Google Maps API key
+          key: GOOGLE_API_KEY, // Replace with your Google Maps API key
         },
       }
     );
@@ -48,15 +46,18 @@ async function reverseGeocode(lat, lng) {
   }
 }
 
-async function getCoverPhoto() {
-    try {const url = `https://api.unsplash.com/search/collections?page=1&per_page=20&query=party-happy&orientation=landscape&color=purple&order_by=relevant&content_filter=high&client_id=${UNSPLASH_KEY}`;
-        const response = await axios.get(url);
-        const randomIndex = Math.floor(Math.random() * 19);//
-        const result = response.results[randomIndex];
-        const photoUrl = result.preview_photos.urls.small;
-        return photoUrl;
-    } catch (error) {
-        console.error("Error get photos from unsplash:", error.message);
-        throw error;
-    }
+export async function getCoverPhoto() {
+  try {
+    const url = `https://api.unsplash.com/search/collections?page=1&per_page=20&query=party-happy&orientation=landscape&color=purple&order_by=relevant&content_filter=high&client_id=${UNSPLASH_KEY}`;
+    const response = await axios.get(url);
+    console.log(JSON.stringify(response) + "!!!! -->");
+    const randomIndex = Math.floor(Math.random() * 19); //
+    const result = response.results[randomIndex];
+    const photoUrl = result.preview_photos.urls.small;
+    console.log(photoUrl)
+    return photoUrl;
+  } catch (error) {
+    console.error("Error get photos from unsplash:", error.message);
+    throw error;
+  }
 }

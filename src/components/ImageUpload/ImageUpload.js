@@ -3,25 +3,13 @@ import defaultImage from "../../assets/images/default-avatar.png";
 import { Avatar, Button } from "@mui/material";
 import "./ImageUpload.scss";
 
-const ImageUpload = (props) => {
-  const [file, setFile] = useState();
-  const [previewUrl, setPreviewUrl] = useState();
+const ImageUpload = (setFile) => {
+ 
+ 
   const [isValid, setIsValid] = useState(false);
 
   const fileInputRef = useRef();
 
-  //   useEffect(() => {
-  //     if (!file) {
-  //       return;
-  //     }
-  //     const fileReader = new FileReader();
-  //     // when reading is done
-  //     fileReader.onload = () => {
-  //       setPreviewUrl(fileReader.result);
-  //     };
-  //     //create a url for the file
-  //     fileReader.readAsDataURL(file);
-  //   }, [file]);
 
   const pickedHandler = (event) => {
     let pickedFile;
@@ -51,6 +39,8 @@ const ImageUpload = (props) => {
     fileInputRef.current.click();
   };
 
+   
+    
   // input is invisible but click on it will open the file picker use useRef, store a reference and access dom click feature
   return (
     <div className="image-upload">

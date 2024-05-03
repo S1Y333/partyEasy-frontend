@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import "../SignUpComplete/SignUpComplete.scss";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -54,11 +55,12 @@ const SignUp = () => {
   return (
     <div className="cover-form">
       <HeaderLogo />
-      <div className="">
+      <div className="signupform">
+        <Typography variant="h5" sx={{ marginTop: "2rem"}}>Sign Up</Typography>
         <Box
           component="form"
           noValidate
-          className="form__box"
+          className="signupform__box"
           // onSubmit={handleSubmit}
         >
           <TextField
@@ -73,45 +75,18 @@ const SignUp = () => {
             placeholder="Your Email"
           />
 
-          <Box
-            sx={{
-              width: { xs: "398px", md: "434px" },
-              height: "70px",
-            }}
-          >
+          
             <Button
               type="submit"
-              fullWidth
               variant="outlined"
-              sx={{
-                mt: "24px",
-                mb: 2,
-                height: "41px",
-                background: "#ffffff",
-                // fontFamily: "'Inter', sans-serif",
-
-                color: "#ffffff",
-                opacity: "30%",
-
-                textTransform: "none",
-                //   backgroundColor: validationRes.isValid ? "#6750A4" : "#6B7280",
-                //   ":hover": {
-                //     bgcolor: "#6750A4",
-                //   },
-                "& .MuiButton-label": {
-                  fontStyle: "normal",
-                  fontWeight: "500",
-                  fontSize: "14px",
-                  lineHeight: "150%",
-                },
-              }}
+              sx={{ marginTop:"2rem", color: "white", borderColor:"white"}}
               //    disabled={!validationRes.isValid || isCheckingBackEnd}
               onClick={handleSubmit}
             >
               {/* {isCheckingBackEnd ? <CircularWaiting size={20} /> : "Log in"} */}
               Sign Up
             </Button>
-          </Box>
+          
         </Box>
       </div>
     </div>
