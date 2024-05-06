@@ -15,11 +15,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { currentUser } from "./utils/auth-functions";
 import Header from "./pages/Header/Header";
-
+import UserRoute from "./components/Routes/UserRoute";
 import "react-toastify/dist/ReactToastify.css";
+import { loginSuccess } from "./actions/userActions";
 
 import React from "react";
 import PackageListPage from "./pages/PackageListPage/PackageListPage";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 //
 
 function App() {
@@ -32,18 +34,17 @@ function App() {
         const idTokenResult = await user.getIdTokenResult();
         console.log("idTokenResult", idTokenResult);
 
-        currentUser(idTokenResult.token)
-          .then((res) => {
-            dispatch({
-              type: "LOGGED_IN_USER",
-              payload: {
-                email: res.data.email,
-                token: idTokenResult.token,
-                id: res.data.id,
-              },
-            });
-          })
-          .catch((err) => console.log(err));
+       
+            dispatch(
+              loginSuccess(
+                {
+                  email: user.email,
+                  token: idTokenResult.token,
+                },
+                idTokenResult.token
+              )
+            );
+        
       }
     });
     //clean up
@@ -55,14 +56,17 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<CoverPage />} />
-        <Route path="formPage" element={<Questionaire />} />
-        <Route path="packageDetail/:packageId" element={<PackageDetail />} />
-        {/* <Route path="user/packageList/:userId" element={<SavedPackageList />} /> */}
-        <Route path="packageList" element={<PackageListPage />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<SignUp />} />
+        <Route path="/formPage" element={<Questionaire />} />
+        <Route path="/packageDetail/:packageId" element={<PackageDetail />} />
+        <Route path="/packageList" element={<PackageListPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/signup/complete" element={<SignUpComplete />} />
-        <Route path="userprofile" element={<UserProfile />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route element={<UserRoute />}>
+          <Route path="/userprofile" element={<UserProfile />} />
+        </Route>
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

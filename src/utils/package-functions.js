@@ -39,9 +39,17 @@ export const getPackageById = async (id) => {
   }
 }
 
-export const getUserPackages = async (authtoken) =>
-  await axios.get(`${process.env.REACT_APP_API}/package/user`, {
-    headers: {
-      authtoken,
-    },
-  });
+export const getUserPackages = async (authtoken) => {
+  
+    try {
+        const response = await axios.post(`${SERVER_URL}/package/userPackage`,{},
+            {
+          headers: {
+            authtoken,
+          },
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+  }
+}

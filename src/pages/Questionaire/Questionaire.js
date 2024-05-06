@@ -9,10 +9,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import "./Questionaire.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AutocompleteInput from "../../components/AutoComplete/AutoCompleteInput";
 import { formatCoordinateString } from "../../utils/helper";
 import { createNewPackage } from "../../utils/package-functions";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -40,26 +42,27 @@ function getStyles(name, eachName, theme) {
 
 const Questionaire = () => {
   const theme = useTheme();
- const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state }));
+  let navigate = useNavigate();
 
   const [drinkName, setDrinkName] = useState([]);
   const [foodName, setFoodName] = useState([]);
-  const [coordinates, setCoordinates] = useState({})
+  const [coordinates, setCoordinates] = useState({});
   const initialFormData = {
     numOfGuests: 0,
     budget: 0,
   };
-  const [formData, setFormData] = useState(initialFormData)
-//   const handleChange = (event) => {
-//     event.preventDefault();
-//     set
+  const [formData, setFormData] = useState(initialFormData);
+  //   const handleChange = (event) => {
+  //     event.preventDefault();
+  //     set
 
   // }
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prevState) => ({ ...prevState, [name]: value }));
-    };
-  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   const handleDrinkChange = (event) => {
     const {
       target: { value },
@@ -71,17 +74,24 @@ const Questionaire = () => {
   };
 
   const handleFoodChange = (event) => {
-     const {
-       target: { value },
-     } = event;
-     setFoodName(
-       // On autofill we get a stringified value.
-       typeof value === "string" ? value.split(",") : value
-     );
-  }
+    const {
+      target: { value },
+    } = event;
+    setFoodName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+
+    if (formData.numOfGuests > 1000) {
+      toast.error(
+        "The maximum number of Guests is 1000"
+      );
+    }
     const FormattedCoordinates = formatCoordinateString(coordinates);
     const newRequestData = {
       numOfGuests: formData.numOfGuests,
@@ -91,8 +101,17 @@ const Questionaire = () => {
       food: foodName,
     };
 
-    const newPackage = await createNewPackage(user.token, newRequestData); //successful, tested
+    //
     //redirect to the packagelist page with new created packageinfo
+
+    console.log(user + "!!!!");
+    if (user && user.token) {
+
+      const newPackage = await createNewPackage(user.token, newRequestData); //successful, tested
+      navigate("/packageList");
+    } else {
+      navigate("/login");
+    }
     
     // }
     // console.log(
@@ -105,8 +124,7 @@ const Questionaire = () => {
     //     " " +
     //     coordinates
     // );
-  }
-  
+  };
 
   return (
     <div>
@@ -121,6 +139,7 @@ const Questionaire = () => {
           value={FormData.numOfGuests}
           onChange={handleChange}
           name="numOfGuests"
+          required
         />
         <br />
         <TextField
@@ -131,6 +150,7 @@ const Questionaire = () => {
           value={FormData.budget}
           onChange={handleChange}
           name="budget"
+          required
         />
 
         <br />
@@ -148,6 +168,7 @@ const Questionaire = () => {
             onChange={handleDrinkChange}
             input={<OutlinedInput label="Name" />}
             MenuProps={MenuProps}
+            required
           >
             {drink.map((name) => (
               <MenuItem
@@ -171,6 +192,7 @@ const Questionaire = () => {
             onChange={handleFoodChange}
             input={<OutlinedInput label="Food Name" />}
             MenuProps={MenuProps}
+            required
           >
             {food.map((name) => (
               <MenuItem

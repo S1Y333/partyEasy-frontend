@@ -18,7 +18,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword,getIdTokenResult, } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
-import { currentUser } from "../../utils/auth-functions";
+import { loginSuccess } from "../../actions/userActions";
+import { createOrUpdateUser, currentUser } from "../../utils/auth-functions";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -51,14 +52,16 @@ const LoginForm = () => {
       const idTokenResult = await getIdTokenResult(user); //get user token
       try {
         const res = await currentUser(idTokenResult.token);
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-            id: res.data.id,
-          },
-        });
+        dispatch(
+          loginSuccess(
+            {
+              email: user.email,
+              token: idTokenResult.token,
+            },
+            idTokenResult.token
+          )
+        );
+
         navigate("/userprofile");
         
       } catch (error) {
@@ -97,13 +100,16 @@ const LoginForm = () => {
                 onChange={handleInputChange}
                 required
                 fullWidth
+                type={showPassword ? "text" : "password"}
                 //   error={validationRes.errs?.email}
                 //   helperText={validationRes.errs?.email}
                 InputProps={{
                   endAdornment: (
                     <IconButton onClick={() => setShowPassword(!showPassword)}>
                       {showPassword ? (
-                        <Visibility sx={{ fontSize: "20px", color: "#ffffff" }} />
+                        <Visibility
+                          sx={{ fontSize: "20px", color: "#ffffff" }}
+                        />
                       ) : (
                         <VisibilityOff
                           sx={{ fontSize: "20px", color: "#ffffff" }}
@@ -149,7 +155,9 @@ const LoginForm = () => {
                   },
                 }}
               />
-              <p className="form__forPassword">Forgot Password?</p>
+              <Link to="/forgotpassword" className="link">
+                <p className="form__forPassword">Forgot Password?</p>
+              </Link>
             </Box>
             <Box className="form__bottom">
               <p className="form__bottom-copy">Don't have an account?</p>

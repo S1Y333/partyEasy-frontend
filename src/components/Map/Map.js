@@ -1,4 +1,4 @@
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader,Marker } from "@react-google-maps/api";
 import { useState, useCallback } from "react";
 
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -45,11 +45,12 @@ const Map = ({ coordinates }) => {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={10}
+          zoom={1}
           onLoad={onLoad}
           onUnmount={onUnmount}
         >
-          {/* Child components, such as markers, info windows, etc. */}
+          <Marker position={center} />
+        
           <></>
         </GoogleMap>
       ) : (

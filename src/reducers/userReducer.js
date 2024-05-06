@@ -1,9 +1,29 @@
-export function userReducer(state = null, action) {
+// Initial state
+const initialState = {
+  isAuthenticated: false,
+  user: null,
+  token:null
+};
+
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGOUT = "LOGOUT";
+
+export function userReducer(state = initialState, action) {
   switch (action.type) {
-    case "LOGGED_IN_USER":
-      return action.payload;
+    case "LOGIN_SUCCESS":
+        return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload.user,
+       token: action.payload.token
+      };
     case "LOGOUT":
-      return action.payload;
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+        token:null
+      };
     default:
       return state;
   }
