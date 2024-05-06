@@ -3,7 +3,7 @@ import defaultImage from "../../assets/images/default-avatar.png";
 import { Avatar, Button } from "@mui/material";
 import "./ImageUpload.scss";
 
-const ImageUpload = (setFile) => {
+const ImageUpload = ({setFile}) => {
  
  
   const [isValid, setIsValid] = useState(false);
@@ -50,7 +50,11 @@ const ImageUpload = (setFile) => {
         src={defaultImage}
         alt="user profile photo"
         sx={{ width: 60, height: 60, id: "image-preview" }}
-        imgProps={{ id: "image-preview" }}
+        slotProps={{
+          img: {
+            id: "image-preview",
+          },
+        }}
       />
       <input
         type="file"

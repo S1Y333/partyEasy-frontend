@@ -4,7 +4,7 @@ import Favorite from "@mui/icons-material/Favorite";
 import Map from "../../components/Map/Map";
 import NavHeader from "../../components/NavHeader/NavHeader";
 import "./PackageDetail.scss";
-
+import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -21,6 +21,8 @@ import { getPackageById } from "../../utils/package-functions";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import LinkIcon from "@mui/icons-material/Link";
+import ListItemButton from "@mui/material/ListItemButton";
+import { Link } from "react-router-dom";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -34,7 +36,7 @@ const PackageDetail = () => {
   const [food, setFood] = useState("");
   const [budget, setBudget] = useState("");
   const [coordinates, setCoordinates] = useState([]);
-
+  const [totalPack, setTotalPack] = useState(0);
   useEffect(() => {
     loadPackageDetail();
   }, []);
@@ -43,10 +45,11 @@ const PackageDetail = () => {
     const result = await getPackageById(packageId);
     setVenue(result.data.venues.venuename);
     setVenuelink(result.data.venues.link);
-    setDrink(result.data.drinks.map((d) => d.drinkname));
-    setFood(result.data.foods.map((f) => f.foodchoice));
+    setDrink(result.data.drinks.map((d) => d.drinkname).join(", "));
+    setFood(result.data.foods.map((f) => {return `${f.foodname} of ${f.foodchoice} party size` }).join(", "));
     setBudget(result.data.price);
     setCoordinates(result.data.venues.location);
+    setTotalPack(result.data.drinks.length);
     // setPackageDetail(result.data);
   };
   // console.log(packageDetail);
@@ -58,7 +61,11 @@ const PackageDetail = () => {
 
       <div className="detail__up">
         <PageTop title="Package Detail" />
-       {coordinates.length>0? <Map coordinates={coordinates} /> : <Loading />}
+        {coordinates.length > 0 ? (
+          <Map coordinates={coordinates} />
+        ) : (
+          <Loading />
+        )}
       </div>
       <div className="detail__down">
         <List sx={{ width: "100%" }}>
@@ -68,11 +75,17 @@ const PackageDetail = () => {
                 <FmdGoodIcon />
               </Avatar>
             </ListItemAvatar>
+
             <ListItemText
               primary="Venue"
-              secondary={venue}
+              secondary={`3 hours of ${venue}`}
               secondaryTypographyProps={{ color: " white" }}
             />
+            <Link to={venuelink} target="_blank" className="link">
+              <ListItemButton>
+                <LinkIcon />
+              </ListItemButton>
+            </Link>
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -82,7 +95,7 @@ const PackageDetail = () => {
             </ListItemAvatar>
             <ListItemText
               primary="Drink"
-              secondary={drink}
+              secondary={`${totalPack} Packs of Drinks: ${drink}. Each pack serves around 10 people`}
               secondaryTypographyProps={{ color: " white" }}
             />
           </ListItem>
@@ -94,7 +107,7 @@ const PackageDetail = () => {
             </ListItemAvatar>
             <ListItemText
               primary="Food"
-              secondary={food}
+              secondary={`${totalPack} Packs of Food: ${food}. Each pack serves around 10 people`}
               secondaryTypographyProps={{ color: " white" }}
             />
           </ListItem>
@@ -102,7 +115,7 @@ const PackageDetail = () => {
       </div>
       <div className="detail__bottom">
         <Typography variant="h5" gutterBottom>
-          Budget from CA${budget}
+          Budget from CA ${budget}
         </Typography>
 
         <Checkbox

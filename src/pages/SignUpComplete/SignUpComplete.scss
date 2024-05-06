@@ -30,3 +30,22 @@
     }
   }
 }
+
+.image-upload {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1rem;
+  height: 8rem;
+}
+
+#standard-basic-email,
+#standard-basic-username,
+#standard-basic{
+    color: $Primary-White;
+
+     &-label {
+    color: $Primary-White;
+  }
+}

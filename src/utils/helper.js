@@ -46,18 +46,3 @@ export async function reverseGeocode(lat, lng) {
   }
 }
 
-export async function getCoverPhoto() {
-  try {
-    const url = `https://api.unsplash.com/search/collections?page=1&per_page=20&query=party-happy&orientation=landscape&color=purple&order_by=relevant&content_filter=high&client_id=${UNSPLASH_KEY}`;
-    const response = await axios.get(url);
-    console.log(JSON.stringify(response) + "!!!! -->");
-    const randomIndex = Math.floor(Math.random() * 19); //
-    const result = response.results[randomIndex];
-    const photoUrl = result.preview_photos.urls.small;
-    console.log(photoUrl)
-    return photoUrl;
-  } catch (error) {
-    console.error("Error get photos from unsplash:", error.message);
-    throw error;
-  }
-}

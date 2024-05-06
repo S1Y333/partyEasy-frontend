@@ -24,7 +24,7 @@ const PackageCard = ({ packageInfo }) => {
   const venuename = packageInfo.venues.venuename;
   const budget = packageInfo.price;
   const [address, setAddress] = useState("");
-  const [coverUrl, setCoverUrl] = useState(sampleImg);
+  const coverUrl = packageInfo.coverphotolink;
   const lat = packageInfo.venues.location[0];
   const lon = packageInfo.venues.location[1];
 
@@ -49,7 +49,7 @@ const PackageCard = ({ packageInfo }) => {
   return (
     <Card sx={{ width: 350, marginBottom: "2rem" }}>
       <Link to={`/packageDetail/${packageId}`} className="link">
-        <CardMedia sx={{ height: 140 }} image={sampleImg} title="party img" />
+        <CardMedia sx={{ height: 140 }} image={coverUrl} title="party img" />
         <CardContent
           style={{
             display: "flex",
