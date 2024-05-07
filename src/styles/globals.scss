@@ -1,0 +1,179 @@
+@use "./partials/variables.scss" as *;
+@use "./partials/mixin.scss" as *;
+@use "./partials/typography.scss" as *;
+
+body {
+  margin: 0;
+  font-family: Rubik, sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  background-color: $Background-Light-grey;
+  color: $Primary-White;
+}
+
+// Media query for mobile devices
+h1 {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+h3 {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: 600;
+}
+
+p1,
+.body-large {
+  font-size: 0.9375rem;
+  line-height: 1.625rem;
+}
+
+p2,
+.body-medium {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+p3,
+.body-small {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+}
+
+.divider {
+  display: block;
+  border: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 0.04rem;
+  background-color: $Secondary-Cloud;
+}
+
+.link {
+  text-decoration: none;
+  color: $Primary-White;
+}
+
+.cover {
+  background-image: url("../assets/images/Cream\ and\ Purple\ Illustrated\ Login\ Page\ Mobile\ Prototype-2.png");
+  height: 100vh;
+
+  &-form {
+    background-color:$Primary-Black;
+    opacity: 80%;
+    min-height: 100vh; 
+  }
+}
+
+.paper {
+  margin: -6rem 1rem;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* Position relative to allow z-index */
+  z-index: 3;
+  background-color: $Primary-White;
+
+  @include tablet {
+    margin: -6rem 2rem;
+  }
+
+  @include desktop {
+    margin: -6rem 8.13rem;
+  }
+}
+
+.button {
+  // background-color: $Primary-Instock-Indigo;
+  display: flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 20px;
+  background-color: $Primary-Black;;
+
+  @include tablet {
+    border-radius: 2.25rem;
+    width: 8rem;
+    height: 2.5rem;
+    gap: 0.1rem;
+  }
+
+  @include desktop {
+    border-radius: 2.25rem;
+    width: 8rem;
+    height: 2.5rem;
+    gap: 0.1rem;
+  }
+}
+
+button,
+select,
+input,
+textarea {
+  font-family: Rubik;
+  
+}
+
+button {
+  :hover {
+    cursor: pointer;
+  }
+}
+// Base font sizes and line heights for desktop and tablet
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  h3 {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    color: $Primary-White;
+  }
+
+  h4 {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+
+  p1,
+  .body-large {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+
+  p2,
+  .body-medium {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+
+  p3,
+  .body-small {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+}

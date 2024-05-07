@@ -1,0 +1,96 @@
+import SignUpForm from "../../components/SignupForm/SignupForm";
+import HeaderLogo from "../../components/HeaderLogo/HeaderLogo";
+import { sendSignInLinkToEmail } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import {
+  TextField,
+  Button,
+  Typography,
+  IconButton,
+  Box,
+  Snackbar,
+  Grid,
+  InputAdornment,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "../SignUpComplete/SignUpComplete.scss";
+
+const SignUp = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //send user an email to confirm emaill address
+    const config = {
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      handleCodeInApp: true,
+    };
+
+    await sendSignInLinkToEmail(auth, email, config);
+    // .then(() => {
+    //   //save user email in local storage
+    //   localStorage.setItem("emailForSignUp", email);
+    //   toast.success(
+    //     `Email is sent to ${email}. Click the link to complete your registration.`
+    //   );
+    // })
+    // .catch((error) => {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   // ...
+    // });
+
+    
+    //save user email in local storage
+    window.localStorage.setItem("emailForSignUp", email);
+
+    toast.success(
+      `Email is sent to ${email}. Click the link to complete your registration.`);
+  };
+
+  return (
+    <div className="cover-form">
+      <HeaderLogo />
+      <div className="signupform">
+        <Typography variant="h5" sx={{ marginTop: "2rem"}}>Sign Up</Typography>
+        <Box
+          component="form"
+          noValidate
+          className="signupform__box"
+          // onSubmit={handleSubmit}
+        >
+          <TextField
+            name="email"
+            className="signupform__text"
+            id="standard-basic"
+            value={email}
+            label="Email"
+            variant="standard"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Your Email"
+          />
+
+          
+            <Button
+              type="submit"
+              variant="outlined"
+              sx={{ marginTop:"2rem", color: "white", borderColor:"white"}}
+              //    disabled={!validationRes.isValid || isCheckingBackEnd}
+              onClick={handleSubmit}
+            >
+              {/* {isCheckingBackEnd ? <CircularWaiting size={20} /> : "Log in"} */}
+              Sign Up
+            </Button>
+          
+        </Box>
+      </div>
+    </div>
+  );
+};
+
+export default SignUp;

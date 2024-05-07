@@ -1,0 +1,28 @@
+.chat {
+  &__type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 1.5rem;
+  }
+
+  &__frame {
+      max-width: 80%; /* Adjust the maximum width as needed */
+  margin: 10px; /* Adjust margin as needed */
+  padding: 10px; /* Adjust padding as needed */
+  background-color: rgb(247, 246, 246); /* Background color */
+  border-radius: 15px; /* Rounded corners */
+  border: 2px solid #ccc; 
+    // border-width: 0.5vw;
+    // border-style: solid;
+    // border-radius: 0.3rem;
+    // padding: 3.5vw;
+    // background-color: white;
+  }
+
+  &__type {
+    color: #333; /* Text color */
+  margin: 0; 
+  }
+}
