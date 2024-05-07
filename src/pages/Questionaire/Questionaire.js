@@ -1,4 +1,4 @@
-import Header from "../Header/Header";
+import Header from "../../components/Header/Header";
 import { TextField, Button, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -48,6 +48,7 @@ const Questionaire = () => {
   const [drinkName, setDrinkName] = useState([]);
   const [foodName, setFoodName] = useState([]);
   const [coordinates, setCoordinates] = useState({});
+  const [error, setError] = useState(false);
   const initialFormData = {
     numOfGuests: 0,
     budget: 0,
@@ -59,7 +60,15 @@ const Questionaire = () => {
 
   // }
   const handleChange = (e) => {
+    
+    if (e.target.value.trim() === "") {
+      setError(true);
+    } else {
+      setError(false);
+    }
+    
     const { name, value } = e.target;
+
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
@@ -74,6 +83,7 @@ const Questionaire = () => {
   };
 
   const handleFoodChange = (event) => {
+    
     const {
       target: { value },
     } = event;
@@ -86,7 +96,10 @@ const Questionaire = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
+    if (error || !formData.numOfGuests || !formData.budget ||!drinkName || !foodName) {
+      toast.error("All fields are required!");
+      return;
+    }
     if (formData.numOfGuests > 1000) {
       toast.error(
         "The maximum number of Guests is 1000"
@@ -113,18 +126,10 @@ const Questionaire = () => {
       navigate("/login");
     }
     
-    // }
-    // console.log(
-    //   "DATA GET!!....>>" +
-    //     JSON.stringify(formData) +
-    //     " " +
-    //     drinkName +
-    //     " " +
-    //     foodName +
-    //     " " +
-    //     coordinates
-    // );
+    
   };
+
+  console.log(error);
 
   return (
     <div>
@@ -133,13 +138,14 @@ const Questionaire = () => {
       <form className="form">
         <TextField
           style={{ width: "100%", margin: "5px" }}
-          type="text"
+          type="number"
           label="Number Of Guests*"
           variant="outlined"
           value={FormData.numOfGuests}
           onChange={handleChange}
           name="numOfGuests"
           required
+          error={error}
         />
         <br />
         <TextField
@@ -151,6 +157,7 @@ const Questionaire = () => {
           onChange={handleChange}
           name="budget"
           required
+          error={error}
         />
 
         <br />

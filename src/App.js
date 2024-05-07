@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { currentUser } from "./utils/auth-functions";
-import Header from "./pages/Header/Header";
+import Header from "./components/Header/Header";
 import UserRoute from "./components/Routes/UserRoute";
 import "react-toastify/dist/ReactToastify.css";
 import { loginSuccess } from "./actions/userActions";
@@ -34,16 +34,18 @@ function App() {
         const idTokenResult = await user.getIdTokenResult();
         console.log("idTokenResult", idTokenResult);
 
-       
-            dispatch(
+        const res = await currentUser(idTokenResult.token);
+            if (res.data)
+           { dispatch(
               loginSuccess(
                 {
-                  email: user.email,
+                  name: res.data.username,
+                  avatar: res.data.profilephotolink,
                   token: idTokenResult.token,
                 },
                 idTokenResult.token
               )
-            );
+            );}
         
       }
     });

@@ -24,7 +24,6 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import { createNewUser } from "../../utils/auth-functions";
 import HeaderLogo from "../../components/HeaderLogo/HeaderLogo";
-import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import "./SignUpComplete.scss";
 import defaultImage from "../../assets/images/default-avatar.png";
 import { loginSuccess } from "../../actions/userActions";
@@ -41,7 +40,7 @@ const SignUpComplete = () => {
 
   let navigate = useNavigate();
 
-    const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const fileInputRef = useRef();
   
@@ -70,7 +69,7 @@ const SignUpComplete = () => {
         setIsValid(false);
         fileIsValid = false;
       }
-      //   props.onInput(props.id, pickedFile, fileIsValid);
+    
     };
 
     const openFileDialog = () => {
@@ -115,21 +114,17 @@ const SignUpComplete = () => {
         let user = auth.currentUser;
         await updatePassword(user, password);
         const idTokenResult = await getIdTokenResult(user);
-
-        //profile photo upload to cloudinary, then return a link which will be 
-        //written in databaseim
        
 
         // redux store
-        //  console.log("user", user, "idTokenResult", idTokenResult);
-        console.log(username + " " + file);
-        console.log(JSON.stringify(formData) + "!!!!");
+        
         try {
           const res = await createNewUser(idTokenResult.token, formData);
            dispatch(
              loginSuccess(
                {
-                 email: user.email,
+                 name: res.data.username,
+                 avatar: res.data.profilephotolink,
                  token: idTokenResult.token,
                },
                idTokenResult.token
@@ -145,55 +140,7 @@ const SignUpComplete = () => {
     }
   };
 
-  //upload and resize photo to cloudinary then return a link
-  //  const fileUploadAndResize = (e) => {
-  //    //console.log(e.target.files);
-  //    //resize
-  //    let files = e.target.files;
-  //    let allUploadedFiles = values.images;
-
-  //    if (files) {
-  //      setLoading(true);
-  //      for (let i = 0; i < files.length; i++) {
-  //        Resizer.imageFileResizer(
-  //          files[i],
-  //          720,
-  //          720,
-  //          "JPEG",
-  //          100,
-  //          0,
-  //          (uri) => {
-  //            // console.log(uri);
-  //            axios
-  //              .post(
-  //                `${process.env.REACT_APP_API}/uploadimages`,
-  //                { image: uri },
-  //                {
-  //                  headers: {
-  //                    authtoken: user ? user.token : "",
-  //                  },
-  //                }
-  //              )
-  //              .then((res) => {
-  //                console.log("IMAGE UPLOAD RES DATA", res);
-  //                setLoading(false);
-  //                //push all the image url to the array
-  //                allUploadedFiles.push(res.data);
-  //                // push allUploadedFiles to the image array in the product object
-  //                setValues({ ...values, image: allUploadedFiles });
-  //              })
-  //              .catch((err) => {
-  //                setLoading(false);
-  //                console.log("CLOUDINARY UPLOAD ERR", err);
-  //              });
-  //          },
-  //          "base64"
-  //        );
-  //      }
-  //    }
-  //    //send back to server to upload to cloudinary
-  //    //set url to images[] in the parent component - product create
-  //  };
+  
   
   return (
     <div className="cover-form ">
@@ -209,7 +156,6 @@ const SignUpComplete = () => {
           {/* image upload */}
           <div className="image-upload">
             <Avatar
-              // id="image-preview"
               className="video-upload__thumbnail"
               src={defaultImage}
               alt="user profile photo"
@@ -239,7 +185,7 @@ const SignUpComplete = () => {
             >
               Change avatar
             </Button>
-            {/* {!isValid && <p>{props.errorText}</p>} */}
+      
           </div>
 
           <TextField
@@ -273,8 +219,7 @@ const SignUpComplete = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
             type={showPassword ? "text" : "password"}
-            //   error={validationRes.errs?.email}
-            //   helperText={validationRes.errs?.email}
+        
             InputProps={{
               endAdornment: (
                 <IconButton onClick={() => setShowPassword(!showPassword)}>
@@ -294,9 +239,7 @@ const SignUpComplete = () => {
             type="submit"
             variant="outlined"
             sx={{ marginTop: "2rem", color: "white", borderColor: "white" }}
-            //    disabled={!validationRes.isValid || isCheckingBackEnd}
           >
-            {/* {isCheckingBackEnd ? <CircularWaiting size={20} /> : "Log in"} */}
             Complete Sign Up
           </Button>
         </Box>
