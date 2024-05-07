@@ -1,0 +1,23 @@
+@use "../../styles/partials/mixin.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
+.cover {
+  
+
+  &__button {
+    width: 12rem; /* Adjust width and height to control the button size */
+    height: 12rem;
+    border-radius: 50%; /* Makes the button circular */
+    background-color: $Primary-White; /* Button background color */
+    color: Primary-Black; /* Text color */
+    border: none; /* Removes border */
+    outline: none; /* Removes default focus outline */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    position: relative;
+    top: 18rem;
+    left: 14.7rem;
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+}

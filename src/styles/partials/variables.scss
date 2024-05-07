@@ -1,0 +1,25 @@
+// media breakpoints
+$mobile-breakpoint: 320px;
+$tablet-breakpoint: 768px;
+$desktop-breakpoint: 1280px;
+
+//Primary Colors
+$Primary-Black: #13182c;
+$Primary-White: #ffffff;
+// Secondary Colors
+$Secondary-Slate: #5c667e;
+$Secondary-Cloud: #bdc5d5;
+// Background Colors
+// top navigation header background, CTA button hover state background
+$Background-Graphite: #232940;
+//page background, table column header background, CTA background
+$Background-Light-grey: #f7f8f9;
+// Supporting Colors
+$Supporting-Green: #158463;
+$Supporting-Red: #c94515;
+
+//margins for mobile and tablet
+
+$mobile-margins-sides: 1rem;
+$tablet-margins-sides: 2rem;
+$desktop-margin-sides: 8rem;

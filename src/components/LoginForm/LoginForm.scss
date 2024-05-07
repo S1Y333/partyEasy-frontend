@@ -1,0 +1,59 @@
+@use "../../styles/partials/mixin.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
+.form {
+  display: flex;
+  margin: 10vw;
+  justify-content: center;
+
+  
+
+  &__text {
+    color: white;
+  }
+
+  &__reme {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__forPassword {
+    // border-bottom: 1px solid $Primary-White;
+    text-decoration: underline;
+    
+    font-size:0.9rem;
+  }
+
+  &__bottom {
+    display: flex;
+    font-size: 1.2rem;
+    justify-content: center;
+
+     &-signup{
+        margin-left: 0.5rem;
+        text-decoration: underline;
+        font-weight:600
+     }
+
+  }
+}
+
+
+#standard-email ,
+#standard-basic {
+color:$Primary-White;
+  &-label {
+    color: $Primary-White;
+  }
+  &__button {
+    border-color: white;
+    color:$Primary-White;
+  }
+}
+
+
+
+.link {
+     color: $Primary-White;
+}
