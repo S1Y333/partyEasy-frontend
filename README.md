@@ -49,3 +49,4 @@ screenshots the folder structure
 npm i 
 set up .env environment variables
 npm start to run the frontend
+ 
