@@ -120,7 +120,9 @@ const SignUpComplete = () => {
         
         try {
           const res = await createNewUser(idTokenResult.token, formData);
-           dispatch(
+          if (res)
+          {
+            dispatch(
              loginSuccess(
                {
                  name: res.data.username,
@@ -129,8 +131,9 @@ const SignUpComplete = () => {
                },
                idTokenResult.token
              )
-           );
-          navigate("/userprofile");
+            );
+           navigate("/userprofile");}
+         
         } catch (error) {
           console.log(error);
         }
