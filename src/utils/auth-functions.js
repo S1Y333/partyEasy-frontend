@@ -28,18 +28,3 @@ export const currentUser = async (authtoken) => {
     );
 }
 
-export const fetchUserProfile = async () => {
-  try {
-    const response =await axios.post(
-      `${SERVER_URL}/user/userprofile`,
-      {},
-      {
-        headers: {
-          authtoken,
-        },
-      });
-    return response.data;
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
-      }
-}

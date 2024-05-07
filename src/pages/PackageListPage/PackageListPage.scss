@@ -8,3 +8,23 @@
         margin: 2rem;
     }
 }
+
+.chaticon {
+
+    &__container {
+position: relative; /* Ensure the container has a position other than static */
+  
+    }
+
+    &__img {
+        position: fixed;
+  top: 800px; /* Adjust top position as needed */
+  right: 20px; /* Adjust right position as needed */
+  z-index: 9999; /* Set a high z-index value to ensure the icon appears above other elements */
+  background-color: rgba(157, 70, 4, 0.675); /* Example background color */
+  padding: 10px;
+  border-radius: 50%; /* Make it round for an icon effect */
+  color: white; /* Text color */
+  cursor: pointer; 
+    }
+}

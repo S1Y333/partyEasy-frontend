@@ -55,7 +55,8 @@ const LoginForm = () => {
         dispatch(
           loginSuccess(
             {
-              email: user.email,
+              name: res.username,
+              avatar: res.profilephotolink,
               token: idTokenResult.token,
             },
             idTokenResult.token
