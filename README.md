@@ -42,7 +42,9 @@ There are 11 pages designed for different functionality.
 ###  Sitemap
 
 screenshots the folder structure
- 
+ <img width="216" alt="Screen Shot 2024-05-07 at 12 04 41 AM" src="https://github.com/S1Y333/partyEasy-frontend/assets/105386341/26e9c681-9144-4934-8cca-5172e84b44b2">
+<img width="169" alt="Screen Shot 2024-05-07 at 12 04 55 AM" src="https://github.com/S1Y333/partyEasy-frontend/assets/105386341/476adcc2-27f2-47be-b2ef-b52e8f5eb9a1">
+
 
 ###  Usage
 
