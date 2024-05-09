@@ -28,7 +28,7 @@ const UserProfile = () => {
   useEffect(() => {
         loadUserPackages();
         
-      },[])    
+      })    
   
    
 
