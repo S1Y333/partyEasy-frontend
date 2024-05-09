@@ -11,7 +11,7 @@ const NavHeader = () => {
   return (
     <div className="header__logo">
       <Link to="/">
-        <img className="logo__img" src={logo} />
+        <img className="logo__img" src={logo} alt="logo"/>
       </Link>
       <Link to={user && user.token ? "/userprofile" : "/login"} className="link">
         <nav className="header__nav">

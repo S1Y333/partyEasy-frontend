@@ -1,21 +1,15 @@
-import SignUpForm from "../../components/SignupForm/SignupForm";
+
 import HeaderLogo from "../../components/HeaderLogo/HeaderLogo";
 import { sendSignInLinkToEmail } from "firebase/auth";
 import { auth } from "../../firebase";
-import { useNavigate } from "react-router-dom";
+
 import {
   TextField,
   Button,
   Typography,
-  IconButton,
   Box,
-  Snackbar,
-  Grid,
-  InputAdornment,
-  FormControlLabel,
-  Checkbox,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "../SignUpComplete/SignUpComplete.scss";
 
