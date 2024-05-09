@@ -1,5 +1,5 @@
 import { GoogleMap, useJsApiLoader,Marker } from "@react-google-maps/api";
-import {  useCallback } from "react";
+import {  useCallback, useMemo } from "react";
 
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -22,7 +22,7 @@ const Map = ({ coordinates }) => {
 
   const center = useMemo(() => {
     return { lat: parseFloat(coordinates[0]), lng: parseFloat(coordinates[1]) };
-  }, []);
+  }, [coordinates]);
  
   console.log(JSON.stringify(center));
 
