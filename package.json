@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.15",
@@ -21,7 +22,7 @@
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.5",
-    "redux": "^5.0.1",
+    "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "sass": "^1.75.0",
     "socket.io-client": "^4.7.5",

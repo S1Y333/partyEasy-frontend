@@ -9,42 +9,46 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import SendIcon from "@mui/icons-material/Send";
 import "./ChatModal.scss";
-import { io } from "socket.io-client";
-import { useState } from "react";
+import {socket} from "../../app/socket"
 
+import { useState, useEffect } from "react";
 
 const ChatModal = ({ open, handleClose }) => {
   const fullScreen = useMediaQuery("(max-width:767px)");
-    const socket = io(`${process.env.REACT_APP_ASSETS_URL}`);
-    const [chatMessage, setChatMessage] = useState("");
-    
-    const sendMessages = (e) => {
-      e.preventDefault();
-
-      if (chatMessage) {
-        socket.emit("message", chatMessage);
-        setChatMessage("");
-      }
-
-      // Listen for messages
-      socket.on("message", (data) => {
-        // const li = document.createElement("li");
-        // li.textContent = data;
-        //   document.querySelector("ul").appendChild(li);
-
-        const chatEl = document.createElement("div");
-        chatEl.classList.add("chat__frame");
-        document.querySelector(".dynamic-chats").appendChild(chatEl);
-
-        const chatCopy = document.createElement("p");
-        chatCopy.classList.add("chat__copy");
-        chatCopy.textContent = data;
-        chatEl.appendChild(chatCopy);
-      });
-    }
- 
-    
   
+  const [chatMessage, setChatMessage] = useState("");
+
+  const sendMessages = (e) => {
+    e.preventDefault();
+
+    if (chatMessage) {
+      socket.emit("message", chatMessage);
+      setChatMessage("");
+    }
+    // socket.off("message sent")
+    // socket.disconnect()
+  };
+
+  // Listen for messages
+    useEffect(() => {
+        socket.on("message", (data) => {
+            // const li = document.createElement("li");
+            // li.textContent = data;
+            //   document.querySelector("ul").appendChild(li);
+            const chatContainer = document.querySelector(".dynamic-chats");
+            if (chatContainer) {
+                const chatEl = document.createElement("div");
+                chatEl.classList.add("chat__frame");
+                chatContainer.appendChild(chatEl);
+
+                const chatCopy = document.createElement("p");
+                chatCopy.classList.add("chat__copy");
+                chatCopy.textContent = data;
+                chatEl.appendChild(chatCopy);
+            }
+        });
+    },[])
+
   return (
     <>
       <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
@@ -54,11 +58,11 @@ const ChatModal = ({ open, handleClose }) => {
           </div>
 
           <DialogTitle id="alert-dialog-title" className="dialog__title">
-            Chat Room
+            Party Easy App Chat Room
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Welcome!
+              Welcome everyone!
             </DialogContentText>
             <div class="dynamic-chats"></div>
             <div className="chat__type">
