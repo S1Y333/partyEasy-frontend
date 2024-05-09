@@ -51,7 +51,7 @@ const SignUpComplete = () => {
         pickedFile = event.target.files[0];
 
         setFile(pickedFile);
-        setIsValid(true);
+        // setIsValid(true);
        // fileIsValid = true;
         const reader = new FileReader();
         reader.onload = function (e) {
@@ -62,7 +62,7 @@ const SignUpComplete = () => {
 
         reader.readAsDataURL(pickedFile);
       } else {
-        setIsValid(false);
+        // setIsValid(false);
    //     fileIsValid = false;
       }
     
