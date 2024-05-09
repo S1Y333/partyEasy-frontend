@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const HeaderLogo = () => {
   return <div className="logo">
       <Link to="/packageList">
-      <img className="logo__img" src={logo} />
+      <img className="logo__img" src={logo} alt="logo"/>
       </Link>
   </div>;
 };

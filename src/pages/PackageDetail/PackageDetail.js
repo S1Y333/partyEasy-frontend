@@ -4,7 +4,6 @@ import Favorite from "@mui/icons-material/Favorite";
 import Map from "../../components/Map/Map";
 import NavHeader from "../../components/NavHeader/NavHeader";
 import "./PackageDetail.scss";
-import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -24,7 +23,6 @@ import LinkIcon from "@mui/icons-material/Link";
 import ListItemButton from "@mui/material/ListItemButton";
 import { Link } from "react-router-dom";
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 
 const PackageDetail = () => {
@@ -39,7 +37,7 @@ const PackageDetail = () => {
   const [totalPack, setTotalPack] = useState(0);
   useEffect(() => {
     loadPackageDetail();
-  }, []);
+  });
 
   const loadPackageDetail = async () => {
     const result = await getPackageById(packageId);

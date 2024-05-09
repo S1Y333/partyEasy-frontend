@@ -1,25 +1,21 @@
 import {
   TextField,
   Button,
-  Typography,
   IconButton,
   Box,
-  Snackbar,
-  Grid,
-  InputAdornment,
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./LoginForm.scss";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import Stack from "@mui/material/Stack";
+
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword,getIdTokenResult, } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../actions/userActions";
-import { createOrUpdateUser, currentUser } from "../../utils/auth-functions";
+import {  currentUser } from "../../utils/auth-functions";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -66,8 +62,7 @@ const LoginForm = () => {
         navigate("/userprofile");
         
       } catch (error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log(error)
       };
     } catch (error) {
       console.log(error)

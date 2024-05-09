@@ -3,9 +3,6 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 import {
   getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
 } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 

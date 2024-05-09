@@ -7,7 +7,6 @@ import { Typography } from "@mui/material";
 import { getAllPackages } from "../../utils/package-functions";
 import ChatIcon from "@mui/icons-material/Chat";
 import ChatModal from "../../components/ChatModal/ChatModal";
-import SocialModal from "../../components/SocialModal/SocialModal";
 
 const PackageListPage = () => {
   //get all package info
