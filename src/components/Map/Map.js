@@ -19,24 +19,21 @@ const Map = ({ coordinates }) => {
     lat: parseFloat(coordinates[0]),
     lng: parseFloat(coordinates[1]),
   };
-  // const center = {
-  //   lat: 43.6654866,
-  //   lng: -79.4703492,
-  // };
+ 
   console.log(JSON.stringify(center));
 
-  const [map, setMap] = useState(null);
+ // const [map, setMap] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
 
-    setMap(map);
-  }, []);
+    //setMap(map);
+  }, [center]);
 
   const onUnmount = useCallback(function callback(map) {
-    setMap(null);
+    // setMap(null);
   }, []);
 
   return (

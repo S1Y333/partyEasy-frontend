@@ -1,7 +1,6 @@
 import Header from "../../components/Header/Header";
-import { TextField, Button, Box } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import AutocompleteInput from "../../components/AutoComplete/AutoCompleteInput";
 import { formatCoordinateString } from "../../utils/helper";
 import { createNewPackage } from "../../utils/package-functions";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const ITEM_HEIGHT = 48;
@@ -120,7 +119,7 @@ const Questionaire = () => {
     console.log(user + "!!!!");
     if (user && user.token) {
 
-      const newPackage = await createNewPackage(user.token, newRequestData); //successful, tested
+     await createNewPackage(user.token, newRequestData); //successful, tested
       navigate("/packageList");
     } else {
       navigate("/login");
