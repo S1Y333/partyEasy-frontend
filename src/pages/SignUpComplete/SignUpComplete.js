@@ -5,11 +5,7 @@ import {
   IconButton,
   Box,
    Avatar,
-  Snackbar,
-  Grid,
-  InputAdornment,
-  FormControlLabel,
-  Checkbox,
+
 } from "@mui/material";
 import {
   signInWithEmailLink,
@@ -46,17 +42,17 @@ const SignUpComplete = () => {
   
     useEffect(() => {
       setEmail(localStorage.getItem("emailForSignUp"));
-    });
+    },[]);
 
     const pickedHandler = (event) => {
       let pickedFile;
-      let fileIsValid = isValid;
+     // let fileIsValid = isValid;
       if (event.target.files || event.target.files.length === 1) {
         pickedFile = event.target.files[0];
 
         setFile(pickedFile);
         setIsValid(true);
-        fileIsValid = true;
+       // fileIsValid = true;
         const reader = new FileReader();
         reader.onload = function (e) {
           const imagePreview = document.getElementById("image-preview");
@@ -67,7 +63,7 @@ const SignUpComplete = () => {
         reader.readAsDataURL(pickedFile);
       } else {
         setIsValid(false);
-        fileIsValid = false;
+   //     fileIsValid = false;
       }
     
     };

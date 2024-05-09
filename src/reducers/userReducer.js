@@ -5,8 +5,8 @@ const initialState = {
   token:null
 };
 
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const LOGOUT = "LOGOUT";
+// const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+// const LOGOUT = "LOGOUT";
 
 export function userReducer(state = initialState, action) {
   switch (action.type) {

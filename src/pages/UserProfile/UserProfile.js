@@ -1,4 +1,4 @@
-import PackageCard from "../../components/PackageCard/PackageCard";
+
 import Header from "../../components/Header/Header";
 import "./UserProfile.scss";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,7 +28,7 @@ const UserProfile = () => {
   useEffect(() => {
         loadUserPackages();
         
-      },[user])    
+      },[])    
   
    
 

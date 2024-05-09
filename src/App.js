@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CoverPage from "./pages/CoverPage/CoverPage";
 import Questionaire from "./pages/Questionaire/Questionaire";
 import PackageDetail from "./pages/PackageDetail/PackageDetail";
-import SavedPackageList from "./pages/SavedPackageList/SavedPackageList";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import UserProfile from "./pages/UserProfile/UserProfile";
@@ -14,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { currentUser } from "./utils/auth-functions";
-import Header from "./components/Header/Header";
+
 import UserRoute from "./components/Routes/UserRoute";
 import "react-toastify/dist/ReactToastify.css";
 import { loginSuccess } from "./actions/userActions";
