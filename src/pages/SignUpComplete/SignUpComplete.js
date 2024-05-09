@@ -36,7 +36,7 @@ const SignUpComplete = () => {
 
   let navigate = useNavigate();
 
-  const [isValid, setIsValid] = useState(false);
+  //const [isValid, setIsValid] = useState(false);
 
   const fileInputRef = useRef();
   
