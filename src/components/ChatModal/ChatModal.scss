@@ -8,12 +8,13 @@
   }
 
   &__frame {
-      max-width: 80%; /* Adjust the maximum width as needed */
-  margin: 10px; /* Adjust margin as needed */
-  padding: 10px; /* Adjust padding as needed */
-  background-color: rgb(247, 246, 246); /* Background color */
-  border-radius: 15px; /* Rounded corners */
-  border: 2px solid #ccc; 
+    max-width: 80%; /* Adjust the maximum width as needed */
+    margin: 10px; /* Adjust margin as needed */
+    padding: 10px; /* Adjust padding as needed */
+    background-color: rgb(247, 246, 246); /* Background color */
+    border-radius: 15px; /* Rounded corners */
+    border: 2px solid #ccc;
+
     // border-width: 0.5vw;
     // border-style: solid;
     // border-radius: 0.3rem;
@@ -23,6 +24,15 @@
 
   &__type {
     color: #333; /* Text color */
-  margin: 0; 
+    margin: 0;
   }
 }
+
+.dialog {
+  &__wrapper {
+    height: 30rem;
+    width: 28rem;
+  }
+}
+
+

@@ -35,9 +35,9 @@
 
   @include tablet {
     display: flex;
-    flex-direction: row;
+   
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     padding-left: 2rem;
     padding-right: 2rem;
     height: 11.5rem;

@@ -13,7 +13,7 @@ import {socket} from "../../app/socket"
 import { useState, useEffect } from "react";
 
 const ChatModal = ({ open, handleClose }) => {
-  const fullScreen = useMediaQuery("(max-width:767px)");
+  const fullScreen = useMediaQuery("(max-width:500px)");
   
   const [chatMessage, setChatMessage] = useState("");
 
@@ -69,17 +69,17 @@ const ChatModal = ({ open, handleClose }) => {
                 autoFocus
                 required
                 margin="dense"
-                id="name"
-                name="email"
-                //   label="Email Address"
+                id="message"
+                name="message"
                 type="text"
                 value={chatMessage}
-                sx={{ width: "21rem" }}
+                sx={{ width: "21rem"}}
                 variant="outlined"
                 onChange={(e) => setChatMessage(e.target.value)}
               />
               <SendIcon
-                sx={{ height: "3rem", width: "3rem", marginLeft: "0.5rem" }}
+                sx={{ height: "2.5rem", width: "2.5rem", marginLeft: "1rem" }}
+                className="chat__sendicon"
                 onClick={sendMessages}
               />
             </div>
