@@ -29,7 +29,10 @@ const PackageListPage = () => {
     
   return (
     <div className="cover-form packagelist">
-      <NavHeader />
+      <div className="packagelist__header">
+        <NavHeader />
+      </div>
+
       <div className="packagelist__title">
         <Typography variant="h5">Package List</Typography>
       </div>
@@ -48,7 +51,6 @@ const PackageListPage = () => {
         />
       </div>
       <ChatModal open={open} handleClose={handleClose} />
-     
     </div>
   );
 }
