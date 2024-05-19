@@ -16,11 +16,17 @@ import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import { reverseGeocode} from "../../utils/helper";
 import { useEffect, useState } from "react";
 import SocialModal from "../SocialModal/SocialModal"
+import { useSelector, useDispatch } from "react-redux";
 
 const PackageCard = ({ packageInfo }) => {
+  const { user } = useSelector((state) => state.user);
+
   const packageId = packageInfo.id;
   const venuename = packageInfo.venues.venuename;
   const budget = packageInfo.price;
+  const likes = packageInfo.likes;
+  const saves = packageInfo.saves;
+
   const [address, setAddress] = useState("");
   const coverUrl = packageInfo.coverphotolink;
   const lat = packageInfo.venues.location[0];
@@ -40,6 +46,16 @@ const PackageCard = ({ packageInfo }) => {
     const result = await reverseGeocode(lat, lon);
     setAddress(result);
   };
+
+  const handleLike = () => {
+    //no user found, then can still view how many likes now, click on like will be poped to login
+    //user table need to add a likes column with liked packagelist ids?
+    //if user found, user liked the video, the heart showed red, if user hasn't like the video, 
+    //it shows unchecked, the same logic for saves
+    
+  }
+
+  const handleSave = () => {};
 
   //get cover photo
   // const getCover = async () => {
@@ -84,14 +100,18 @@ const PackageCard = ({ packageInfo }) => {
               // sx={{ color: "white" }}
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: "red" }} />}
+              onClick={handleLike}
             />
+            {likes}
           </IconButton>
           <IconButton aria-label="save">
             <Checkbox
               // sx={{ color: "white" }}
               icon={<BookmarkBorderOutlinedIcon />}
               checkedIcon={<BookmarkOutlinedIcon sx={{ color: "red" }} />}
+              onClick={handleSave}
             />
+            {saves}
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon onClick={() => setSocialOpen(true)} />
