@@ -32,7 +32,7 @@ const ChatModal = ({ open, handleClose }) => {
     // socket.off("message sent")
     // socket.disconnect()
   };
-  let activityTimer; //set timeout when certain time passed
+  
 
   // Listen for messages
   useEffect(() => {
@@ -55,16 +55,17 @@ const ChatModal = ({ open, handleClose }) => {
       
     if (activity)
    { socket.on("activity", (name) => {
-     activity.innerHTML = `${name} is typing...`
-     
+     activity.innerHTML = `${name} is typing...`;
+
+     let activityTimer; //set timeout when certain time passed
      //clear after 3 seconds
-    clearTimeout(activityTimer)
+     clearTimeout(activityTimer);
      activityTimer = setTimeout(() => {
-       activity.innerHTML = ""
-     },1000)
+       activity.innerHTML = "";
+     }, 1000);
    })
     }
-  }, []);
+  });
 
 if (msgInput)
 {
