@@ -25,20 +25,24 @@ const UserProfile = () => {
   
 
  
-  useEffect(() => {
-        loadUserPackages();
-        
-      },[])    
+  
   
 
-  const loadUserPackages = async () => {
-  try {  const result = await getUserPackages(user.token);
-   
-    setUserPackages(result.userPackagelist);
-  } catch (error) {
-    console.log("Error loading user packages:", error);
-  }
-  }
+ 
+
+  useEffect(() => {
+       const loadUserPackages = async () => {
+         try {
+           const result = await getUserPackages(user.token);
+
+           setUserPackages(result.userPackagelist);
+         } catch (error) {
+           console.log("Error loading user packages:", error);
+         }
+       };
+      loadUserPackages();
+    });  
+  
   // if (user.username)
   // { username = user.username; }
   //if(user.profile
