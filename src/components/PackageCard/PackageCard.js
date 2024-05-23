@@ -16,10 +16,10 @@ import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import { reverseGeocode} from "../../utils/helper";
 import { useEffect, useState } from "react";
 import SocialModal from "../SocialModal/SocialModal"
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 
 const PackageCard = ({ packageInfo }) => {
-  const { user } = useSelector((state) => state.user);
+ // const { user } = useSelector((state) => state.user);
 
   const packageId = packageInfo.id;
   const venuename = packageInfo.venues.venuename;
