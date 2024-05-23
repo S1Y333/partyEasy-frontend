@@ -65,7 +65,7 @@ const ChatModal = ({ open, handleClose }) => {
      }, 1000);
    })
     }
-  });
+  },[]);
 
 if (msgInput)
 {
