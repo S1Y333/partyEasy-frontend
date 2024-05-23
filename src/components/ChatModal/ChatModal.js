@@ -58,7 +58,7 @@ const ChatModal = ({ open, handleClose }) => {
      activity.innerHTML = `${name} is typing...`
      
      //clear after 3 seconds
-    //  clearTimeout(activityTimer)
+    clearTimeout(activityTimer)
      activityTimer = setTimeout(() => {
        activity.innerHTML = ""
      },1000)
