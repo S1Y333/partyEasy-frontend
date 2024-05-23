@@ -22,9 +22,17 @@
     // background-color: white;
   }
 
+ 
   &__type {
     color: #333; /* Text color */
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__activity {
+    margin-bottom: 0;
   }
 }
 

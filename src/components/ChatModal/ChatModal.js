@@ -16,6 +16,10 @@ const ChatModal = ({ open, handleClose }) => {
   const fullScreen = useMediaQuery("(max-width:500px)");
   
   const [chatMessage, setChatMessage] = useState("");
+  const activity = document.querySelector(".chat__activity");
+  const msgInput = document.querySelector(".message");
+  
+ 
 
   const sendMessages = (e) => {
     e.preventDefault();
@@ -23,31 +27,52 @@ const ChatModal = ({ open, handleClose }) => {
     if (chatMessage) {
       socket.emit("message", chatMessage);
       setChatMessage("");
+     // activity.innerHTML = "";
     }
     // socket.off("message sent")
     // socket.disconnect()
   };
+  let activityTimer; //set timeout when certain time passed
 
   // Listen for messages
-    useEffect(() => {
-        socket.on("message", (data) => {
-            // const li = document.createElement("li");
-            // li.textContent = data;
-            //   document.querySelector("ul").appendChild(li);
-            const chatContainer = document.querySelector(".dynamic-chats");
-            if (chatContainer) {
-                const chatEl = document.createElement("div");
-                chatEl.classList.add("chat__frame");
-                chatContainer.appendChild(chatEl);
+  useEffect(() => {
+    socket.on("message", (data) => {
+      // const li = document.createElement("li");
+      // li.textContent = data;
+      //   document.querySelector("ul").appendChild(li);
+      const chatContainer = document.querySelector(".dynamic-chats");
+      if (chatContainer) {
+        const chatEl = document.createElement("div");
+        chatEl.classList.add("chat__frame");
+        chatContainer.appendChild(chatEl);
 
-                const chatCopy = document.createElement("p");
-                chatCopy.classList.add("chat__copy");
-                chatCopy.textContent = data;
-                chatEl.appendChild(chatCopy);
-            }
-        });
-    },[])
+        const chatCopy = document.createElement("p");
+        chatCopy.classList.add("chat__copy");
+        chatCopy.textContent = data;
+        chatEl.appendChild(chatCopy);
+      }
+    });
+      
+    if (activity)
+   { socket.on("activity", (name) => {
+     activity.innerHTML = `${name} is typing...`
+     
+     //clear after 3 seconds
+    clearTimeout(activityTimer)
+     activityTimer = setTimeout(() => {
+       activity.innerHTML = ""
+     },1000)
+   })
+    }
+  }, []);
 
+if (msgInput)
+{
+  msgInput.addEventListener("keypress", () => {
+   socket.emit("activity", socket.id.substring(0, 5));
+ });
+}
+  
   return (
     <>
       <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
@@ -65,23 +90,27 @@ const ChatModal = ({ open, handleClose }) => {
             </DialogContentText>
             <div class="dynamic-chats"></div>
             <div className="chat__type">
-              <TextField
-                autoFocus
-                required
-                margin="dense"
-                id="message"
-                name="message"
-                type="text"
-                value={chatMessage}
-                sx={{ width: "21rem"}}
-                variant="outlined"
-                onChange={(e) => setChatMessage(e.target.value)}
-              />
-              <SendIcon
-                sx={{ height: "2.5rem", width: "2.5rem", marginLeft: "1rem" }}
-                className="chat__sendicon"
-                onClick={sendMessages}
-              />
+              <p className="chat__activity"></p>
+              <div>
+                <TextField
+                  autoFocus
+                  required
+                  margin="dense"
+                  id="message"
+                  name="message"
+                  className="message"
+                  type="text"
+                  value={chatMessage}
+                  sx={{ width: "21rem" }}
+                  variant="outlined"
+                  onChange={(e) => setChatMessage(e.target.value)}
+                />
+                <SendIcon
+                  sx={{ height: "2.5rem", width: "2.5rem", marginLeft: "1rem" }}
+                  className="chat__sendicon"
+                  onClick={sendMessages}
+                />
+              </div>
             </div>
           </DialogContent>
         </div>
