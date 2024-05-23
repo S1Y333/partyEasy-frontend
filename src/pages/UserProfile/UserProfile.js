@@ -28,10 +28,7 @@ const UserProfile = () => {
   useEffect(() => {
         loadUserPackages();
         
-      })    
-  
-   
-
+      },[])    
   
 
   const loadUserPackages = async () => {
