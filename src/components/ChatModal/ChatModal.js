@@ -10,13 +10,14 @@ import SendIcon from "@mui/icons-material/Send";
 import "./ChatModal.scss";
 import {socket} from "../../app/socket"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 
 const ChatModal = ({ open, handleClose }) => {
   const fullScreen = useMediaQuery("(max-width:500px)");
+  const activityRef = useRef(null);
   
   const [chatMessage, setChatMessage] = useState("");
-  const activity = document.querySelector(".chat__activity");
+  //const activity = document.querySelector(".chat__activity");
   const msgInput = document.querySelector(".message");
   
  
@@ -53,18 +54,22 @@ const ChatModal = ({ open, handleClose }) => {
       }
     });
       
-    if (activity)
-   { socket.on("activity", (name) => {
-     activity.innerHTML = `${name} is typing...`;
+    
+    socket.on("activity", (name) => {
+      if (activityRef.current) {
+        activityRef.current.innerHTML = `${name} is typing...`;
 
-     let activityTimer; //set timeout when certain time passed
-     //clear after 3 seconds
-     clearTimeout(activityTimer);
-     activityTimer = setTimeout(() => {
-       activity.innerHTML = "";
-     }, 1000);
-   })
-    }
+        let activityTimer; //set timeout when certain time passed
+        //clear after 3 seconds
+        clearTimeout(activityTimer);
+        activityTimer = setTimeout(() => {
+          if (activityRef.current) {
+            activityRef.current.innerHTML = "";
+          }
+        }, 1000);
+      }
+    })
+  
   },[]);
 
 if (msgInput)
@@ -91,7 +96,7 @@ if (msgInput)
             </DialogContentText>
             <div class="dynamic-chats"></div>
             <div className="chat__type">
-              <p className="chat__activity"></p>
+              <p ref={activityRef} className="chat__activity"></p>
               <div>
                 <TextField
                   autoFocus
