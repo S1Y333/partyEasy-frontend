@@ -1,5 +1,5 @@
 import NotFoundPage from "./pages/Error/Error";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import CoverPage from "./pages/CoverPage/CoverPage";
 import Questionaire from "./pages/Questionaire/Questionaire";
 import PackageDetail from "./pages/PackageDetail/PackageDetail";
@@ -40,6 +40,8 @@ function App() {
                 {
                   name: res.data.username,
                   avatar: res.data.profilephotolink,
+                  likes: res.data.likesPackages,
+                  saves: res.data.savesPackages,
                   token: idTokenResult.token,
                 },
                 idTokenResult.token
@@ -53,7 +55,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ToastContainer />
       <Routes>
         <Route path="/" element={<CoverPage />} />
@@ -70,7 +72,7 @@ function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
