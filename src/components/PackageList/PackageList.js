@@ -10,17 +10,25 @@ const PackageList = ({ packageList }) => {
 
   return (
     <div className="packagelist__container">
-      {packageList?.map((pack, id) => {
-        const checkLike = findKey(user?.likes, id) || false;
-        const checkSave = findKey(user?.saves, id) ||  false;
-        return (
-          <PackageCard
-            packageInfo={pack}
-            checkLike={checkLike}
-            checkSave={checkSave}
-          />
-        );
-      })}
+      {user
+        ? packageList?.map((pack, id) => {
+            const checkLike = findKey(user?.likes, id) || false;
+            const checkSave = findKey(user?.saves, id) || false;
+            return (
+              <PackageCard
+                packageInfo={pack}
+                checkLike={checkLike}
+                checkSave={checkSave}
+              />
+            );
+          })
+        : packageList?.map((pack, id) => (
+            <PackageCard
+              packageInfo={pack}
+              // checkLike="false"
+              // checkSave="false"
+            />
+          ))}
     </div>
   );
 };
