@@ -46,3 +46,9 @@ export async function reverseGeocode(lat, lng) {
   }
 }
 
+export const findKey = (obj, key) => {
+  if (obj.hasOwnProperty(key)) {
+    return true;
+  }
+  return false;
+};
