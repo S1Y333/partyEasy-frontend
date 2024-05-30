@@ -16,11 +16,11 @@ import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import { reverseGeocode} from "../../utils/helper";
 import { useEffect, useState } from "react";
 import SocialModal from "../SocialModal/SocialModal"
-// import { useSelector, useDispatch } from "react-redux";
 
-const PackageCard = ({ packageInfo }) => {
- // const { user } = useSelector((state) => state.user);
 
+const PackageCard = ({ packageInfo, checkLike, checkSave }) => {
+
+ 
   const packageId = packageInfo.id;
   const venuename = packageInfo.venues.venuename;
   const budget = packageInfo.price;
@@ -31,7 +31,9 @@ const PackageCard = ({ packageInfo }) => {
   const coverUrl = packageInfo.coverphotolink;
   const lat = packageInfo.venues.location[0];
   const lon = packageInfo.venues.location[1];
-   const [socialOpen, setSocialOpen] = useState(false);
+  const [socialOpen, setSocialOpen] = useState(false);
+  //const [likeStatus, setLikeStatus] = useState(checkLike);
+  const likeStatus = checkLike;
 
    const handleClose = () => {
      setSocialOpen(false);
@@ -51,7 +53,10 @@ const PackageCard = ({ packageInfo }) => {
     //no user found, then can still view how many likes now, click on like will be poped to login
     //user table need to add a likes column with liked packagelist ids?
     //if user found, user liked the video, the heart showed red, if user hasn't like the video, 
-    //it shows unchecked, the same logic for saves
+    // if (likeStatus) {
+    //     likeOnePackage()
+    // } else {
+    // }
     
   }
 
@@ -101,6 +106,7 @@ const PackageCard = ({ packageInfo }) => {
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: "red" }} />}
               onClick={handleLike}
+              checked={likeStatus}
             />
             {likes}
           </IconButton>
@@ -110,6 +116,7 @@ const PackageCard = ({ packageInfo }) => {
               icon={<BookmarkBorderOutlinedIcon />}
               checkedIcon={<BookmarkOutlinedIcon sx={{ color: "red" }} />}
               onClick={handleSave}
+              checked={checkSave}
             />
             {saves}
           </IconButton>
