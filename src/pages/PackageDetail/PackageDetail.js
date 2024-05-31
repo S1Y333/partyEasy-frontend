@@ -15,7 +15,7 @@ import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import { Typography } from "@mui/material";
 import PageTop from "../../components/PageTop/PageTop";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { getPackageById } from "../../utils/package-functions";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
@@ -35,21 +35,30 @@ const PackageDetail = () => {
   const [budget, setBudget] = useState("");
   const [coordinates, setCoordinates] = useState([]);
   const [totalPack, setTotalPack] = useState(0);
-  useEffect(() => {
-    loadPackageDetail();
-  });
+ 
 
-  const loadPackageDetail = async () => {
+  const loadPackageDetail = useCallback(async () => {
     const result = await getPackageById(packageId);
     setVenue(result.data.venues.venuename);
     setVenuelink(result.data.venues.link);
     setDrink(result.data.drinks.map((d) => d.drinkname).join(", "));
-    setFood(result.data.foods.map((f) => {return `${f.foodname} of ${f.foodchoice} party size` }).join(", "));
+    setFood(
+      result.data.foods
+        .map((f) => {
+          return `${f.foodname} of ${f.foodchoice} party size`;
+        })
+        .join(", ")
+    );
     setBudget(result.data.price);
     setCoordinates(result.data.venues.location);
     setTotalPack(result.data.drinks.length);
     // setPackageDetail(result.data);
-  };
+  }, [packageId]);
+
+   useEffect(() => {
+     loadPackageDetail();
+   }, [loadPackageDetail]);
+  
   // console.log(packageDetail);
   console.log(coordinates);
 
