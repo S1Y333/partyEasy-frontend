@@ -8,7 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import PackageList from "../../components/PackageList/PackageList";
 import { getUserPackages } from "../../utils/package-functions";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 
 
@@ -23,7 +23,7 @@ const UserProfile = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   
-const loadUserPackages = async () => {
+const loadUserPackages = useCallback(async () => {
   try {
     const result = await getUserPackages(user.token);
 
@@ -31,12 +31,12 @@ const loadUserPackages = async () => {
   } catch (error) {
     console.log("Error loading user packages:", error);
   }
-};
+}, [user.token]);
  
   useEffect(() => {
        
       loadUserPackages();
-    });  
+    }, [loadUserPackages]);  
   
   // if (user.username)
   // { username = user.username; }
