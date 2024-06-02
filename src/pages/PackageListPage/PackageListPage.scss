@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/mixin.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
 
 .packagelist {
       padding: 1rem;
@@ -7,17 +13,29 @@
         justify-content: center;
         margin: 2rem;
     }
+<<<<<<< HEAD
+=======
+
+    &__header {
+        padding: 1rem;
+    }
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
 }
 
 .chaticon {
 
     &__container {
+<<<<<<< HEAD
 position: relative; /* Ensure the container has a position other than static */
+=======
+position: relative;
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   
     }
 
     &__img {
         position: fixed;
+<<<<<<< HEAD
   top: 800px; /* Adjust top position as needed */
   right: 20px; /* Adjust right position as needed */
   z-index: 9999; /* Set a high z-index value to ensure the icon appears above other elements */
@@ -26,5 +44,20 @@ position: relative; /* Ensure the container has a position other than static */
   border-radius: 50%; /* Make it round for an icon effect */
   color: white; /* Text color */
   cursor: pointer; 
+=======
+  top: 800px; 
+  right: 20px; 
+  z-index: 9999;
+  background-color: rgba(157, 4, 14, 0.675); 
+  padding: 10px;
+  border-radius: 50%; 
+  color: white; 
+  cursor: pointer; 
+
+  @include tablet {
+    top:35rem;
+    right: 3rem; 
+  }
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
     }
 }

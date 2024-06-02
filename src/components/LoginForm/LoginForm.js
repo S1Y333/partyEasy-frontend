@@ -53,6 +53,11 @@ const LoginForm = () => {
             {
               name: res.username,
               avatar: res.profilephotolink,
+<<<<<<< HEAD
+=======
+              likes: res.data.likesPackages,
+              saves: res.data.savesPackages,
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
               token: idTokenResult.token,
             },
             idTokenResult.token

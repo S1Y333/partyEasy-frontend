@@ -52,4 +52,44 @@ export const getUserPackages = async (authtoken) => {
     } catch (error) {
         console.log(error);
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+export const likeOnePack = async (authtoken, packageId) => {
+   try {
+     const response = await axios.post(
+       `${SERVER_URL}/package/like/${packageId}`,
+       
+       {
+         headers: {
+           authtoken,
+         },
+       }
+     );
+
+     return response.data;
+   } catch (error) {
+     console.log(error);
+   }
+}
+
+export const saveOnePack = async (authtoken, packageId) => {
+  try {
+    const response = await axios.post(
+      `${SERVER_URL}/package/save/${packageId}`,
+
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20

@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+@use "../../styles/partials/mixin.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
 .chat {
   &__type {
     display: flex;
@@ -8,12 +15,22 @@
   }
 
   &__frame {
+<<<<<<< HEAD
       max-width: 80%; /* Adjust the maximum width as needed */
   margin: 10px; /* Adjust margin as needed */
   padding: 10px; /* Adjust padding as needed */
   background-color: rgb(247, 246, 246); /* Background color */
   border-radius: 15px; /* Rounded corners */
   border: 2px solid #ccc; 
+=======
+    max-width: 80%; /* Adjust the maximum width as needed */
+    margin: 10px; /* Adjust margin as needed */
+    padding: 10px; /* Adjust padding as needed */
+    background-color: rgb(247, 246, 246); /* Background color */
+    border-radius: 15px; /* Rounded corners */
+    border: 2px solid #ccc;
+    
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
     // border-width: 0.5vw;
     // border-style: solid;
     // border-radius: 0.3rem;
@@ -21,8 +38,37 @@
     // background-color: white;
   }
 
+<<<<<<< HEAD
   &__type {
     color: #333; /* Text color */
   margin: 0; 
+=======
+ 
+  &__type {
+    color: #333; /* Text color */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__activity {
+    margin-bottom: 0;
+  }
+}
+
+.dialog {
+  &__wrapper {
+    height: 30rem;
+    width: 28rem;
+  }
+}
+
+.dynamic-chats {
+  height:43rem;
+
+  @include tablet{
+     height: 15rem;
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   }
 }

@@ -1,5 +1,9 @@
 import NotFoundPage from "./pages/Error/Error";
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+=======
+import { Routes, Route, HashRouter } from "react-router-dom";
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
 import CoverPage from "./pages/CoverPage/CoverPage";
 import Questionaire from "./pages/Questionaire/Questionaire";
 import PackageDetail from "./pages/PackageDetail/PackageDetail";
@@ -40,6 +44,11 @@ function App() {
                 {
                   name: res.data.username,
                   avatar: res.data.profilephotolink,
+<<<<<<< HEAD
+=======
+                  likes: res.data.likesPackages,
+                  saves: res.data.savesPackages,
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
                   token: idTokenResult.token,
                 },
                 idTokenResult.token
@@ -53,7 +62,11 @@ function App() {
   }, [dispatch]);
 
   return (
+<<<<<<< HEAD
     <BrowserRouter>
+=======
+    <HashRouter>
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
       <ToastContainer />
       <Routes>
         <Route path="/" element={<CoverPage />} />
@@ -70,7 +83,11 @@ function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+<<<<<<< HEAD
     </BrowserRouter>
+=======
+    </HashRouter>
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   );
 }
 

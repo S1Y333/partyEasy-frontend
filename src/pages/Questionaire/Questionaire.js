@@ -136,7 +136,11 @@ const Questionaire = () => {
 
       <form className="form">
         <TextField
+<<<<<<< HEAD
           style={{ width: "100%", margin: "5px" }}
+=======
+          style={{ width: "60%", margin: "5px" }}
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
           type="number"
           label="Number Of Guests*"
           variant="outlined"
@@ -148,7 +152,11 @@ const Questionaire = () => {
         />
         <br />
         <TextField
+<<<<<<< HEAD
           style={{ width: "100%", margin: "5px" }}
+=======
+          style={{ width: "60%", margin: "5px" }}
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
           type="number"
           label="Estimated Budget*"
           variant="outlined"
@@ -164,7 +172,11 @@ const Questionaire = () => {
         <AutocompleteInput setCoordinates={setCoordinates} />
 
         <br />
+<<<<<<< HEAD
         <FormControl sx={{ m: 1, width: "100%" }}>
+=======
+        <FormControl sx={{ m: 1, width: "60%" }}>
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
           <InputLabel id="demo-multiple-name-label">Drink</InputLabel>
           <Select
             labelId="demo-multiple-name-label"
@@ -188,7 +200,11 @@ const Questionaire = () => {
           </Select>
         </FormControl>
         <br />
+<<<<<<< HEAD
         <FormControl sx={{ m: 1, width: "100%" }}>
+=======
+        <FormControl sx={{ m: 1, width: "60%" }}>
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
           <InputLabel id="demo-multiple-name-label">Food</InputLabel>
           <Select
             labelId="demo-multiple-name-label"

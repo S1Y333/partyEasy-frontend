@@ -72,6 +72,16 @@ p3,
   background-image: url("../assets/images/Cream\ and\ Purple\ Illustrated\ Login\ Page\ Mobile\ Prototype-2.png");
   height: 100vh;
 
+<<<<<<< HEAD
+=======
+    @include tablet {
+       background-image: url("https://images.unsplash.com/photo-1509909756405-be0199881695?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+       background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-size: cover; 
+      }
+
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   &-form {
     background-color:$Primary-Black;
     opacity: 80%;

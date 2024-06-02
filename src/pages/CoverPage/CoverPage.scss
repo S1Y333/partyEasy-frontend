@@ -3,21 +3,62 @@
 @use "../../styles/partials/typography.scss" as *;
 
 .cover {
+<<<<<<< HEAD
   
+=======
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
 
   &__button {
     width: 12rem; /* Adjust width and height to control the button size */
     height: 12rem;
     border-radius: 50%; /* Makes the button circular */
     background-color: $Primary-White; /* Button background color */
+<<<<<<< HEAD
     color: Primary-Black; /* Text color */
+=======
+    color: $Primary-Black; /* Text color */
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
     border: none; /* Removes border */
     outline: none; /* Removes default focus outline */
     cursor: pointer; /* Changes cursor to pointer on hover */
     position: relative;
     top: 18rem;
+<<<<<<< HEAD
     left: 14.7rem;
     font-size: 2.5rem;
     font-weight: 500;
+=======
+    left: 7rem;
+    font-size: 2.5rem;
+    font-weight: 500;
+    animation: bounce 2s infinite;
+    @include tablet {
+      left: 1rem;
+      top: 10rem;
+      background-color: $Primary-White; /* Button background color */
+    color: $Primary-Black; /* Text color */
+    }
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   }
 }

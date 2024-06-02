@@ -17,15 +17,34 @@ import { reverseGeocode} from "../../utils/helper";
 import { useEffect, useState } from "react";
 import SocialModal from "../SocialModal/SocialModal"
 
+<<<<<<< HEAD
 const PackageCard = ({ packageInfo }) => {
   const packageId = packageInfo.id;
   const venuename = packageInfo.venues.venuename;
   const budget = packageInfo.price;
+=======
+
+const PackageCard = ({ packageInfo, checkLike, checkSave }) => {
+
+ 
+  const packageId = packageInfo.id;
+  const venuename = packageInfo.venues.venuename;
+  const budget = packageInfo.price;
+  const likes = packageInfo.likes;
+  const saves = packageInfo.saves;
+
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   const [address, setAddress] = useState("");
   const coverUrl = packageInfo.coverphotolink;
   const lat = packageInfo.venues.location[0];
   const lon = packageInfo.venues.location[1];
+<<<<<<< HEAD
    const [socialOpen, setSocialOpen] = useState(false);
+=======
+  const [socialOpen, setSocialOpen] = useState(false);
+  //const [likeStatus, setLikeStatus] = useState(checkLike);
+  const likeStatus = checkLike;
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
 
    const handleClose = () => {
      setSocialOpen(false);
@@ -41,6 +60,22 @@ const PackageCard = ({ packageInfo }) => {
     setAddress(result);
   };
 
+<<<<<<< HEAD
+=======
+  const handleLike = () => {
+    //no user found, then can still view how many likes now, click on like will be poped to login
+    //user table need to add a likes column with liked packagelist ids?
+    //if user found, user liked the video, the heart showed red, if user hasn't like the video, 
+    // if (likeStatus) {
+    //     likeOnePackage()
+    // } else {
+    // }
+    
+  }
+
+  const handleSave = () => {};
+
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   //get cover photo
   // const getCover = async () => {
   //   const result = await getCoverPhoto();
@@ -84,14 +119,28 @@ const PackageCard = ({ packageInfo }) => {
               // sx={{ color: "white" }}
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: "red" }} />}
+<<<<<<< HEAD
             />
+=======
+              onClick={handleLike}
+              checked={likeStatus}
+            />
+            {likes}
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
           </IconButton>
           <IconButton aria-label="save">
             <Checkbox
               // sx={{ color: "white" }}
               icon={<BookmarkBorderOutlinedIcon />}
               checkedIcon={<BookmarkOutlinedIcon sx={{ color: "red" }} />}
+<<<<<<< HEAD
             />
+=======
+              onClick={handleSave}
+              checked={checkSave}
+            />
+            {saves}
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon onClick={() => setSocialOpen(true)} />

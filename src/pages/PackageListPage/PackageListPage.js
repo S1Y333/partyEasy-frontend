@@ -29,7 +29,14 @@ const PackageListPage = () => {
     
   return (
     <div className="cover-form packagelist">
+<<<<<<< HEAD
       <NavHeader />
+=======
+      <div className="packagelist__header">
+        <NavHeader />
+      </div>
+
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
       <div className="packagelist__title">
         <Typography variant="h5">Package List</Typography>
       </div>
@@ -48,7 +55,10 @@ const PackageListPage = () => {
         />
       </div>
       <ChatModal open={open} handleClose={handleClose} />
+<<<<<<< HEAD
      
+=======
+>>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
     </div>
   );
 }
