@@ -23,23 +23,18 @@ const UserProfile = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   
+const loadUserPackages = async () => {
+  try {
+    const result = await getUserPackages(user.token);
 
+    setUserPackages(result.userPackagelist);
+  } catch (error) {
+    console.log("Error loading user packages:", error);
+  }
+};
  
-  
-  
-
- 
-
   useEffect(() => {
-       const loadUserPackages = async () => {
-         try {
-           const result = await getUserPackages(user.token);
-
-           setUserPackages(result.userPackagelist);
-         } catch (error) {
-           console.log("Error loading user packages:", error);
-         }
-       };
+       
       loadUserPackages();
     });  
   

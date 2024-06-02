@@ -25,7 +25,7 @@ const SignUp = () => {
       url: REDIRECT_URL,
       handleCodeInApp: true,
     };
-    console.log(REDIRECT_URL);
+    
     await sendSignInLinkToEmail(auth, email, config);
     // .then(() => {
     //   //save user email in local storage
