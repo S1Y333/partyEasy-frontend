@@ -15,7 +15,9 @@ import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import { Typography } from "@mui/material";
 import PageTop from "../../components/PageTop/PageTop";
 import { useParams } from "react-router-dom";
+
 import { useCallback, useEffect } from "react";
+
 import { getPackageById } from "../../utils/package-functions";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
@@ -35,9 +37,11 @@ const PackageDetail = () => {
   const [budget, setBudget] = useState("");
   const [coordinates, setCoordinates] = useState([]);
   const [totalPack, setTotalPack] = useState(0);
+
  
 
   const loadPackageDetail = useCallback(async () => {
+
     const result = await getPackageById(packageId);
     setVenue(result.data.venues.venuename);
     setVenuelink(result.data.venues.link);
@@ -53,12 +57,14 @@ const PackageDetail = () => {
     setCoordinates(result.data.venues.location);
     setTotalPack(result.data.drinks.length);
     // setPackageDetail(result.data);
+
   }, [packageId]);
 
    useEffect(() => {
      loadPackageDetail();
    }, [loadPackageDetail]);
   
+
   // console.log(packageDetail);
   console.log(coordinates);
 

@@ -136,6 +136,7 @@ const Questionaire = () => {
 
       <form className="form">
         <TextField
+
           style={{ width: "60%", margin: "5px" }}
           type="number"
           label="Number Of Guests*"
@@ -148,6 +149,7 @@ const Questionaire = () => {
         />
         <br />
         <TextField
+
           style={{ width: "60%", margin: "5px" }}
           type="number"
           label="Estimated Budget*"
@@ -164,7 +166,9 @@ const Questionaire = () => {
         <AutocompleteInput setCoordinates={setCoordinates} />
 
         <br />
+
         <FormControl sx={{ m: 1, width: "60%" }}>
+
           <InputLabel id="demo-multiple-name-label">Drink</InputLabel>
           <Select
             labelId="demo-multiple-name-label"
@@ -188,7 +192,9 @@ const Questionaire = () => {
           </Select>
         </FormControl>
         <br />
+
         <FormControl sx={{ m: 1, width: "60%" }}>
+
           <InputLabel id="demo-multiple-name-label">Food</InputLabel>
           <Select
             labelId="demo-multiple-name-label"

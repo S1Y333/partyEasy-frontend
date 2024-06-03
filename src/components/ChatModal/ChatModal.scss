@@ -1,6 +1,8 @@
+
 @use "../../styles/partials/mixin.scss" as *;
 @use "../../styles/partials/variables.scss" as *;
 @use "../../styles/partials/typography.scss" as *;
+
 
 .chat {
   &__type {
@@ -12,6 +14,7 @@
   }
 
   &__frame {
+
     max-width: 80%; /* Adjust the maximum width as needed */
     margin: 10px; /* Adjust margin as needed */
     padding: 10px; /* Adjust padding as needed */
@@ -19,6 +22,7 @@
     border-radius: 15px; /* Rounded corners */
     border: 2px solid #ccc;
     
+
     // border-width: 0.5vw;
     // border-style: solid;
     // border-radius: 0.3rem;
@@ -26,7 +30,9 @@
     // background-color: white;
   }
 
- 
+
+
+
   &__type {
     color: #333; /* Text color */
     margin: 0;
@@ -52,5 +58,6 @@
 
   @include tablet{
      height: 15rem;
+
   }
 }

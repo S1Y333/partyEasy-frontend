@@ -18,13 +18,17 @@
     justify-content: center;
     margin-bottom: 0;
      :hover {
+
+
        cursor: pointer;
      }
+
     @include tablet {
         margin-bottom: auto;
         position: relative;
         margin-top: 2rem;
     }
+
 
 }
 

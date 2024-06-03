@@ -1,3 +1,4 @@
+
 @use "../../styles/partials/variables.scss" as *;
 @use "../../styles/partials/mixin.scss" as *;
 @use "../../styles/partials/typography.scss" as *;
@@ -11,16 +12,18 @@
         margin: 2rem;
     }
 
+
     &__header {
         padding: 1rem;
     }
-}
 
+  }
 .chaticon {
 
     &__container {
+
 position: relative;
-  
+ 
     }
 
     &__img {
@@ -38,5 +41,6 @@ position: relative;
     top:35rem;
     right: 3rem; 
   }
-    }
+
+  }
 }

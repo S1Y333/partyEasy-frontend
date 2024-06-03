@@ -30,6 +30,7 @@ const PackageList = ({ packageList }) => {
             />
           ))}
     </div>
+
   );
 };
 

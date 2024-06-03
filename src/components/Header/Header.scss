@@ -34,10 +34,7 @@
   box-sizing: border-box;
 
   @include tablet {
-    display: flex;
-   
-    justify-content: space-between;
-    align-items: center;
+
     padding-left: 2rem;
     padding-right: 2rem;
     height: 11.5rem;

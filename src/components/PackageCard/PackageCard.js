@@ -17,7 +17,6 @@ import { reverseGeocode} from "../../utils/helper";
 import { useEffect, useState } from "react";
 import SocialModal from "../SocialModal/SocialModal"
 
-
 const PackageCard = ({ packageInfo, checkLike, checkSave }) => {
 
  
@@ -31,10 +30,10 @@ const PackageCard = ({ packageInfo, checkLike, checkSave }) => {
   const coverUrl = packageInfo.coverphotolink;
   const lat = packageInfo.venues.location[0];
   const lon = packageInfo.venues.location[1];
+
   const [socialOpen, setSocialOpen] = useState(false);
   //const [likeStatus, setLikeStatus] = useState(checkLike);
   const likeStatus = checkLike;
-
    const handleClose = () => {
      setSocialOpen(false);
    };
@@ -49,6 +48,7 @@ const PackageCard = ({ packageInfo, checkLike, checkSave }) => {
     setAddress(result);
   };
 
+
   const handleLike = () => {
     //no user found, then can still view how many likes now, click on like will be poped to login
     //user table need to add a likes column with liked packagelist ids?
@@ -61,6 +61,7 @@ const PackageCard = ({ packageInfo, checkLike, checkSave }) => {
   }
 
   const handleSave = () => {};
+
 
   //get cover photo
   // const getCover = async () => {
@@ -105,20 +106,23 @@ const PackageCard = ({ packageInfo, checkLike, checkSave }) => {
               // sx={{ color: "white" }}
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite sx={{ color: "red" }} />}
-              onClick={handleLike}
-              checked={likeStatus}
+
             />
+
             {likes}
+
           </IconButton>
           <IconButton aria-label="save">
             <Checkbox
               // sx={{ color: "white" }}
               icon={<BookmarkBorderOutlinedIcon />}
               checkedIcon={<BookmarkOutlinedIcon sx={{ color: "red" }} />}
+
               onClick={handleSave}
               checked={checkSave}
             />
             {saves}
+
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon onClick={() => setSocialOpen(true)} />
