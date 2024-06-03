@@ -10,14 +10,6 @@ import SendIcon from "@mui/icons-material/Send";
 import "./ChatModal.scss";
 import {socket} from "../../app/socket"
 
-<<<<<<< HEAD
-import { useState, useEffect } from "react";
-
-const ChatModal = ({ open, handleClose }) => {
-  const fullScreen = useMediaQuery("(max-width:767px)");
-  
-  const [chatMessage, setChatMessage] = useState("");
-=======
 import { useState, useEffect,useRef } from "react";
 
 const ChatModal = ({ open, handleClose }) => {
@@ -29,7 +21,6 @@ const ChatModal = ({ open, handleClose }) => {
   const msgInput = document.querySelector(".message");
   
  
->>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
 
   const sendMessages = (e) => {
     e.preventDefault();
@@ -37,37 +28,11 @@ const ChatModal = ({ open, handleClose }) => {
     if (chatMessage) {
       socket.emit("message", chatMessage);
       setChatMessage("");
-<<<<<<< HEAD
-=======
      // activity.innerHTML = "";
->>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
     }
     // socket.off("message sent")
     // socket.disconnect()
   };
-<<<<<<< HEAD
-
-  // Listen for messages
-    useEffect(() => {
-        socket.on("message", (data) => {
-            // const li = document.createElement("li");
-            // li.textContent = data;
-            //   document.querySelector("ul").appendChild(li);
-            const chatContainer = document.querySelector(".dynamic-chats");
-            if (chatContainer) {
-                const chatEl = document.createElement("div");
-                chatEl.classList.add("chat__frame");
-                chatContainer.appendChild(chatEl);
-
-                const chatCopy = document.createElement("p");
-                chatCopy.classList.add("chat__copy");
-                chatCopy.textContent = data;
-                chatEl.appendChild(chatCopy);
-            }
-        });
-    },[])
-
-=======
   
 
   // Listen for messages
@@ -114,7 +79,6 @@ if (msgInput)
  });
 }
   
->>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   return (
     <>
       <Dialog fullScreen={fullScreen} open={open} onClose={handleClose}>
@@ -132,25 +96,6 @@ if (msgInput)
             </DialogContentText>
             <div class="dynamic-chats"></div>
             <div className="chat__type">
-<<<<<<< HEAD
-              <TextField
-                autoFocus
-                required
-                margin="dense"
-                id="name"
-                name="email"
-                //   label="Email Address"
-                type="text"
-                value={chatMessage}
-                sx={{ width: "21rem" }}
-                variant="outlined"
-                onChange={(e) => setChatMessage(e.target.value)}
-              />
-              <SendIcon
-                sx={{ height: "3rem", width: "3rem", marginLeft: "0.5rem" }}
-                onClick={sendMessages}
-              />
-=======
               <p ref={activityRef} className="chat__activity"></p>
               <div>
                 <TextField
@@ -172,7 +117,6 @@ if (msgInput)
                   onClick={sendMessages}
                 />
               </div>
->>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
             </div>
           </DialogContent>
         </div>

@@ -52,9 +52,6 @@ export const getUserPackages = async (authtoken) => {
     } catch (error) {
         console.log(error);
   }
-<<<<<<< HEAD
-}
-=======
 }
 
 export const likeOnePack = async (authtoken, packageId) => {
@@ -92,4 +89,3 @@ export const saveOnePack = async (authtoken, packageId) => {
     console.log(error);
   }
 };
->>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20

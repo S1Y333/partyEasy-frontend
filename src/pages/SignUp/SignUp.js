@@ -13,11 +13,8 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "../SignUpComplete/SignUpComplete.scss";
 
-<<<<<<< HEAD
-=======
 const REDIRECT_URL = process.env.REACT_APP_REGISTER_REDIRECT_URL;
 
->>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
 const SignUp = () => {
   const [email, setEmail] = useState("");
 
@@ -25,17 +22,10 @@ const SignUp = () => {
     e.preventDefault();
     //send user an email to confirm emaill address
     const config = {
-<<<<<<< HEAD
-      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
-      handleCodeInApp: true,
-    };
-
-=======
       url: REDIRECT_URL,
       handleCodeInApp: true,
     };
-    console.log(REDIRECT_URL);
->>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
+    
     await sendSignInLinkToEmail(auth, email, config);
     // .then(() => {
     //   //save user email in local storage

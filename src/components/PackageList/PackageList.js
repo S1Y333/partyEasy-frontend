@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-
-import PackageCard from "../PackageCard/PackageCard";
-
-import "./PackageList.scss";
-
-const PackageList = ({packageList}) => {
- 
-
-  return (
-   
-      <div className="packagelist__container">
-        {packageList?.map((pack, id) => (
-          <PackageCard packageInfo={pack} />
-        ))}
-      </div>
-    
-=======
 import PackageCard from "../PackageCard/PackageCard";
 import { useSelector } from "react-redux";
 import "./PackageList.scss";
@@ -48,7 +30,6 @@ const PackageList = ({ packageList }) => {
             />
           ))}
     </div>
->>>>>>> cdfe2add478870de480dc1b904a86a39b0406f20
   );
 };
 
