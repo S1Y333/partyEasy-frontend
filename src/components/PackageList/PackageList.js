@@ -5,6 +5,7 @@ import { findKey } from "../../utils/helper";
 
 const PackageList = ({ packageList }) => {
   const { user } = useSelector((state) => state.user);
+  
   //console.log(findKey(user.likes, 11));
   //check if package id is in the likes array, if yes, pass checklike=true,
 
@@ -13,9 +14,11 @@ const PackageList = ({ packageList }) => {
       {user
         ? packageList?.map((pack, id) => {
             const checkLike = findKey(user?.likes, id) || false;
-            const checkSave = findKey(user?.saves, id) || false;
+          const checkSave = findKey(user?.saves, id) || false;
+          console.log(checkLike + " " + id);
             return (
               <PackageCard
+                authtoken={user?.token}
                 packageInfo={pack}
                 checkLike={checkLike}
                 checkSave={checkSave}
@@ -25,8 +28,8 @@ const PackageList = ({ packageList }) => {
         : packageList?.map((pack, id) => (
             <PackageCard
               packageInfo={pack}
-              // checkLike="false"
-              // checkSave="false"
+               checkLike="false"
+              checkSave="false"
             />
           ))}
     </div>
