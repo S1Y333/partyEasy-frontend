@@ -22,11 +22,23 @@ import Loading from "../../components/Loading/Loading";
 import LinkIcon from "@mui/icons-material/Link";
 import ListItemButton from "@mui/material/ListItemButton";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { findKey } from "../../utils/helper";
+import {
+  likeOnePackage,
+  unLikeOnePackage,
+} from "../../utils/package-functions";
 
 
 const PackageDetail = () => {
   const { packageId } = useParams();
+  //load userinfo
+  const { user } = useSelector((state) => state.user);
+  const checkLike = findKey(user?.likes, packageId) || false;
+  const authtoken = user?.token;
+
+  //add click on checked, it will remove liked status
+  
   // const [packageDetail, setPackageDetail] = useState({});
   const [venue, setVenue] = useState("");
   const [venuelink, setVenuelink] = useState("");
@@ -35,6 +47,7 @@ const PackageDetail = () => {
   const [budget, setBudget] = useState("");
   const [coordinates, setCoordinates] = useState([]);
   const [totalPack, setTotalPack] = useState(0);
+  const [likeStatus, setLikeStatus] = useState(checkLike);
  
 
   const loadPackageDetail = useCallback(async () => {
@@ -58,6 +71,20 @@ const PackageDetail = () => {
    useEffect(() => {
      loadPackageDetail();
    }, [loadPackageDetail]);
+  
+    const handleLike = async () => {
+      //no user found, then can still view how many likes now, click on like will be poped to login
+
+      //if user found, user liked the video, the heart showed red, if user hasn't like the video,
+      if (!likeStatus) {
+        await likeOnePackage(authtoken, packageId);
+        setLikeStatus(!likeStatus);
+
+      } else {
+        await unLikeOnePackage(authtoken, packageId);
+        setLikeStatus(!likeStatus);
+      }
+    };
   
   // console.log(packageDetail);
   console.log(coordinates);
@@ -129,6 +156,8 @@ const PackageDetail = () => {
           sx={{ color: "white" }}
           icon={<FavoriteBorder />}
           checkedIcon={<Favorite sx={{ color: "red" }} />}
+          checked={likeStatus}
+          onClick={handleLike}
         />
       </div>
     </div>
