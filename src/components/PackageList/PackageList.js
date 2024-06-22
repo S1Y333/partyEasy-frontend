@@ -18,6 +18,7 @@ const PackageList = ({ packageList }) => {
           console.log(checkLike + " " + id);
             return (
               <PackageCard
+                key = {id}
                 authtoken={user?.token}
                 packageInfo={pack}
                 checkLike={checkLike}
