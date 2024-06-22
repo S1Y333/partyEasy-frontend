@@ -23,7 +23,7 @@ import SocialModal from "../SocialModal/SocialModal";
 
 const PackageCard = ({ authtoken, packageInfo, checkLike, checkSave }) => {
 
-
+  
   const packageId = packageInfo.id;
   const venuename = packageInfo.venues.venuename;
   const budget = packageInfo.price;
@@ -32,8 +32,8 @@ const PackageCard = ({ authtoken, packageInfo, checkLike, checkSave }) => {
 
   const [address, setAddress] = useState("");
   const coverUrl = packageInfo.coverphotolink;
-  const lat = packageInfo.venues.location[0];
-  const lon = packageInfo.venues.location[1];
+  const lat = packageInfo.venues?.location[0];
+  const lon = packageInfo.venues?.location[1];
   const [socialOpen, setSocialOpen] = useState(false);
   const [saveStatus, setSaveStatus] = useState(checkSave);
   const [likeStatus, setLikeStatus] = useState(checkLike);
@@ -43,7 +43,7 @@ const PackageCard = ({ authtoken, packageInfo, checkLike, checkSave }) => {
   };
 
   useEffect(() => {
-    getAddress(lat, lon); //convert to an address
+    getAddress(lat, lon);//convert to an address
   }, [lat, lon]);
 
 

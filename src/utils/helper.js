@@ -30,11 +30,14 @@ export async function reverseGeocode(lat, lng) {
       {
         params: {
           latlng: `${lat},${lng}`,
-          key: GOOGLE_API_KEY, // Replace with your Google Maps API key
+          key: GOOGLE_API_KEY, // 
         },
       }
     );
+    console.log(JSON.stringify(response) + "!!!GEORESPNSE!!!!");
     const result = response.data.results[0];
+    console.log(result);
+
     if (result) {
       return result.formatted_address;
     } else {

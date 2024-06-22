@@ -8,17 +8,18 @@ const PackageList = ({ packageList }) => {
   
   //console.log(findKey(user.likes, 11));
   //check if package id is in the likes array, if yes, pass checklike=true,
+  console.log(packageList);
 
   return (
     <div className="packagelist__container">
       {user
-        ? packageList?.map((pack, id) => {
-            const checkLike = findKey(user?.likes, id) || false;
-          const checkSave = findKey(user?.saves, id) || false;
-          console.log(checkLike + " " + id);
+        ? packageList?.map((pack) => {
+            const checkLike = findKey(user?.likes, pack.id) || false;
+          const checkSave = findKey(user?.saves, pack.id) || false;
+          console.log(checkLike + " " + pack.id);
             return (
               <PackageCard
-                key = {id}
+                key={pack.id}
                 authtoken={user?.token}
                 packageInfo={pack}
                 checkLike={checkLike}
