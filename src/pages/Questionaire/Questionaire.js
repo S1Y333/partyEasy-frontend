@@ -39,6 +39,11 @@ function getStyles(name, eachName, theme) {
   };
 }
 
+const BrokenComponent = () => {
+  throw new Error("Test error"); // Deliberate error for testing
+  return <div>This will not be rendered.</div>;
+};
+
 const Questionaire = () => {
   const theme = useTheme();
   const { user } = useSelector((state) => ({ ...state }));
@@ -133,7 +138,7 @@ const Questionaire = () => {
   return (
     <div>
       <Header page="question" />
-
+    
       <form className="form">
         <TextField
           style={{ width: "60%", margin: "5px" }}

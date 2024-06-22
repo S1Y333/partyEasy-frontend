@@ -46,6 +46,8 @@ const PackageCard = ({ authtoken, packageInfo, checkLike, checkSave }) => {
     getAddress(lat, lon); //convert to an address
   }, [lat, lon]);
 
+  
+
   const getAddress = async (lat, lon) => {
     const result = await reverseGeocode(lat, lon);
     setAddress(result);
@@ -133,7 +135,7 @@ const PackageCard = ({ authtoken, packageInfo, checkLike, checkSave }) => {
               icon={<BookmarkBorderOutlinedIcon />}
               checkedIcon={<BookmarkOutlinedIcon sx={{ color: "red" }} />}
               onClick={handleSave}
-              checked={checkSave}
+              checked={saveStatus}
             />
             {saves}
           </IconButton>
