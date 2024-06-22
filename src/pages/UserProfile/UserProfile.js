@@ -12,6 +12,7 @@ import { useCallback, useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading";
 
 
+
 const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
 
@@ -57,6 +58,7 @@ const loadUserPackages = useCallback(async () => {
     <>
       {userPackages ? (
         <div className="cover-form userprofile">
+          
           {user && (
             <Header
               name={user.name}
@@ -66,7 +68,9 @@ const loadUserPackages = useCallback(async () => {
           {userPackages.length === 0 ? (
             <div className="userprofile-guide">
               <Link to="/" className="link">
-                <p className="userprofile-copy">Create your first party package </p>
+                <p className="userprofile-copy">
+                  Create your first party package{" "}
+                </p>
               </Link>
             </div>
           ) : (

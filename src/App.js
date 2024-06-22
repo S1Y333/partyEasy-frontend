@@ -21,7 +21,8 @@ import { loginSuccess } from "./actions/userActions";
 import React from "react";
 import PackageListPage from "./pages/PackageListPage/PackageListPage";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
-//
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,8 @@ function App() {
     return () => unsubscribe();
   }, [dispatch]);
 
+
+
   return (
     <HashRouter>
       <ToastContainer />
@@ -69,7 +72,7 @@ function App() {
         <Route element={<UserRoute />}>
           <Route path="/userprofile" element={<UserProfile />} />
         </Route>
-
+        {/* <BrokenComponent /> */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </HashRouter>
