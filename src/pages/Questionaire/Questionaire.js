@@ -39,10 +39,7 @@ function getStyles(name, eachName, theme) {
   };
 }
 
-const BrokenComponent = () => {
-  throw new Error("Test error"); // Deliberate error for testing
-  return <div>This will not be rendered.</div>;
-};
+
 
 const Questionaire = () => {
   const theme = useTheme();

@@ -46,7 +46,7 @@ const PackageCard = ({ authtoken, packageInfo, checkLike, checkSave }) => {
     getAddress(lat, lon); //convert to an address
   }, [lat, lon]);
 
-  
+
 
   const getAddress = async (lat, lon) => {
     const result = await reverseGeocode(lat, lon);
@@ -88,6 +88,7 @@ const PackageCard = ({ authtoken, packageInfo, checkLike, checkSave }) => {
   // }
 
   //console.log(venuename + " " + budget + " " + address + "YEAH!!!!");
+  //console.log(typeof (likeStatus) + " " + typeof (checkLike));
 
   return (
     <>
