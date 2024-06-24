@@ -46,13 +46,20 @@ const Questionaire = () => {
   const { user } = useSelector((state) => ({ ...state }));
   let navigate = useNavigate();
 
-  const [drinkName, setDrinkName] = useState([]);
-  const [foodName, setFoodName] = useState([]);
+  const [drinkName, setDrinkName] = useState(localStorage.getItem("drinkName")? JSON.parse(localStorage.getItem("drinkName")) : []);
+  const [foodName, setFoodName] = useState(
+    localStorage.getItem("foodName")
+      ? JSON.parse(localStorage.getItem("foodName"))
+      : []
+  );
   const [coordinates, setCoordinates] = useState({});
   const [error, setError] = useState(false);
+
+  //console.log(localStorage.getItem("numOfGuests"));
+
   const initialFormData = {
-    numOfGuests: 0,
-    budget: 0,
+    numOfGuests: localStorage.getItem("numOfGuests")? localStorage.getItem("numOfGuests") : 0,
+    budget: localStorage.getItem("budget")? localStorage.getItem("budget") : 0,
   };
   const [formData, setFormData] = useState(initialFormData);
   //   const handleChange = (event) => {
@@ -106,6 +113,9 @@ const Questionaire = () => {
         "The maximum number of Guests is 1000"
       );
     }
+
+   
+
     const FormattedCoordinates = formatCoordinateString(coordinates);
     const newRequestData = {
       numOfGuests: formData.numOfGuests,
@@ -115,13 +125,23 @@ const Questionaire = () => {
       food: foodName,
     };
 
-    //
+    //store requestData into localstorage
+    localStorage.setItem("numOfGuests", newRequestData.numOfGuests);
+    localStorage.setItem("budget", newRequestData.budget);
+    localStorage.setItem("drinkName", JSON.stringify(newRequestData.drink));
+    localStorage.setItem("foodName", JSON.stringify(newRequestData.food));
     //redirect to the packagelist page with new created packageinfo
 
     console.log(user + "!!!!");
     if (user && user.token) {
 
      await createNewPackage(user.token, newRequestData); //successful, tested
+      //remove localdata info
+      localStorage.removeItem("numOfGuests");
+      localStorage.removeItem("budget");
+      localStorage.removeItem("drinkName");
+      localStorage.removeItem("foodName");
+
       navigate("/packageList");
     } else {
       navigate("/login");
@@ -135,18 +155,19 @@ const Questionaire = () => {
   return (
     <div>
       <Header page="question" />
-    
+
       <form className="form">
         <TextField
           style={{ width: "60%", margin: "5px" }}
           type="number"
           label="Number Of Guests*"
           variant="outlined"
-          value={FormData.numOfGuests}
+          value={formData.numOfGuests}
           onChange={handleChange}
           name="numOfGuests"
           required
           error={error}
+          InputLabelProps={{ shrink: true }}
         />
         <br />
         <TextField
@@ -154,11 +175,12 @@ const Questionaire = () => {
           type="number"
           label="Estimated Budget*"
           variant="outlined"
-          value={FormData.budget}
+          value={formData.budget}
           onChange={handleChange}
           name="budget"
           required
           error={error}
+          InputLabelProps={{ shrink: true }}
         />
 
         <br />
