@@ -1,3 +1,7 @@
+@use "../../styles/partials/mixin.scss" as *;
+@use "../../styles/partials/variables.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
 .chat {
   &__type {
     display: flex;
@@ -14,7 +18,7 @@
     background-color: rgb(247, 246, 246); /* Background color */
     border-radius: 15px; /* Rounded corners */
     border: 2px solid #ccc;
-
+    
     // border-width: 0.5vw;
     // border-style: solid;
     // border-radius: 0.3rem;
@@ -22,9 +26,17 @@
     // background-color: white;
   }
 
+ 
   &__type {
     color: #333; /* Text color */
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__activity {
+    margin-bottom: 0;
   }
 }
 
@@ -35,4 +47,10 @@
   }
 }
 
+.dynamic-chats {
+  height:43rem;
 
+  @include tablet{
+     height: 15rem;
+  }
+}

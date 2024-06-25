@@ -53,3 +53,75 @@ export const getUserPackages = async (authtoken) => {
         console.log(error);
   }
 }
+
+export const likeOnePackage = async (authtoken, packageId) => {
+   try {
+     const response = await axios.post(
+       `${SERVER_URL}/package/like/${packageId}`,
+       {},
+       {
+         headers: {
+           authtoken,
+         },
+       }
+     );
+
+     return response.data;
+   } catch (error) {
+     console.log(error);
+   }
+}
+
+export const unLikeOnePackage = async (authtoken, packageId) => {
+  try {
+    const response = await axios.post(
+      `${SERVER_URL}/package/unlike/${packageId}`,
+      {},
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const saveOnePackage = async (authtoken, packageId) => {
+  try {
+    const response = await axios.post(
+      `${SERVER_URL}/package/save/${packageId}`,
+     {},
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const unSaveOnePackage = async (authtoken, packageId) => {
+  try {
+    const response = await axios.post(
+      `${SERVER_URL}/package/unsave/${packageId}`,
+      {},
+      {
+        headers: {
+          authtoken,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

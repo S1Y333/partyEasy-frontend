@@ -8,8 +8,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import PackageList from "../../components/PackageList/PackageList";
 import { getUserPackages } from "../../utils/package-functions";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loading from "../../components/Loading/Loading";
+
 
 
 const UserProfile = () => {
@@ -23,22 +24,21 @@ const UserProfile = () => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   
+const loadUserPackages = useCallback(async () => {
+  try {
+    const result = await getUserPackages(user.token);
 
- 
-  useEffect(() => {
-        loadUserPackages();
-        
-      },[])    
-  
-
-  const loadUserPackages = async () => {
-  try {  const result = await getUserPackages(user.token);
-   
     setUserPackages(result.userPackagelist);
   } catch (error) {
     console.log("Error loading user packages:", error);
   }
-  }
+}, [user.token]);
+ 
+  useEffect(() => {
+       
+      loadUserPackages();
+    }, [loadUserPackages]);  
+  
   // if (user.username)
   // { username = user.username; }
   //if(user.profile
@@ -58,6 +58,7 @@ const UserProfile = () => {
     <>
       {userPackages ? (
         <div className="cover-form userprofile">
+          
           {user && (
             <Header
               name={user.name}
@@ -67,7 +68,9 @@ const UserProfile = () => {
           {userPackages.length === 0 ? (
             <div className="userprofile-guide">
               <Link to="/" className="link">
-                <p className="userprofile-copy">Create your first party package </p>
+                <p className="userprofile-copy">
+                  Create your first party package{" "}
+                </p>
               </Link>
             </div>
           ) : (
