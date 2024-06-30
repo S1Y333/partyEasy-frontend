@@ -21,6 +21,7 @@ import { loginSuccess } from "./actions/userActions";
 import React from "react";
 import PackageListPage from "./pages/PackageListPage/PackageListPage";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import OptionsPage from "./pages/OptionsPage/OptionsPage";
 
 
 
@@ -63,6 +64,7 @@ function App() {
       <Routes>
         <Route path="/" element={<CoverPage />} />
         <Route path="/formPage" element={<Questionaire />} />
+        <Route path="/options" element={<OptionsPage />} />
         <Route path="/packageDetail/:packageId" element={<PackageDetail />} />
         <Route path="/packageList" element={<PackageListPage />} />
         <Route path="/login" element={<Login />} />
